@@ -1,0 +1,88 @@
+<script type="text/javascript" src="js/libs/wowslider.js"></script>
+<script type="text/javascript" src="js/libs/script.js"></script>
+<script type="text/javascript" src="js/libs/scriptcarousel.js"></script>
+
+
+<!-- Start WOWSlider.com BODY section -->
+<div class="clearfix"></div>
+
+<div class="active_wrapper" ng-if="settings.sliderType == 'Diaporama' && settings.effect == 'Standard'">
+    <div id="wowslider-container1" basiceffect>
+        <div class="ws_images" id="basicEffect">
+
+        </div>
+    </div>
+</div>
+<div class="active_wrapper" ng-if="settings.sliderType == 'Diaporama' && settings.effect == 'Book'">
+    <div id="wowslider-container1" bookeffect>
+        <div class="ws_images" id="bookEffect">
+        </div>
+    </div>
+</div>
+
+<div class="active_wrapper" ng-if="settings.sliderType == 'Diaporama' && settings.effect == 'Cube'">
+    <div id="wowslider-container1" cubeeffect>
+        <div class="ws_images" id="cubeEffect">
+        </div>
+    </div>
+</div>
+
+<div class="active_wrapper" ng-if="settings.sliderType == 'Diaporama' && settings.effect == 'Rotate'">
+    <div id="wowslider-container1" rotateeffect>
+        <div class="ws_images" id="rotateEffect">
+        </div>
+    </div>
+</div>
+
+<div class="active_wrapper" ng-if="settings.sliderType == 'Diaporama' && settings.effect == 'Stack'">
+    <div id="wowslider-container1" stackeffect>
+        <div class="ws_images" id="stackEffect">
+
+        </div>
+    </div>
+</div>
+
+<div class="active_wrapper" ng-if="settings.sliderType == 'Diaporama' && settings.effect == 'Carousel'">
+    <div id="wowslider-container1" carouseleffect>
+        <div class="ws_images" id="carouselEffect">
+            <ul>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- END WOWSlider.com BODY section -->
+
+<div class="active_wrapper" ng-style="{'background-color':settings.bgColor, 'border':settings.spaceSize*2 + 'px solid rgba(0,0,0,0)'}"
+    ng-show="settings.sliderType == 'Galerie'">
+    <div ng-repeat="image in imageList track by $index" class="flip-3d galleries-{{settings.nbImages}}" ng-if="image.cropped!=''">
+        <figure ng-style="{'border':settings.spaceSize*2 + 'px solid rgba(0,0,0,0)'}">
+            <img src="{{targetDir}}{{image.cropped}}" alt>
+            <figcaption class="figcaption-{{settings.nbImages}}">
+                <div class="desc-product desc-product-{{settings.imageFormat}} desc-product-{{settings.nbImages}}">
+                    <div class="divPrices">
+                        <p ng-style="{'color':settings.description.textColor,'font-family':settings.font.name,'font-size':settings.textSize + 'px'}">{{image.text}}</p>
+                    </div>
+                </div>
+                <div ng-show="showLine && showDivPrices">
+                    <div ng-if="image.price!='0' && image.cropped!= ''" class="divPrices">
+                        <p ng-style="{'color':settings.price.textColor,'font-family':settings.font.name,'font-size':settings.textSize + 'px'}">{{image.price}}&nbsp;{{settings.price.unit}}
+                            <span ng-if="image.oldPrice!='0'" ng-style="{'color':settings.price.textColor,'font-family':settings.font.name,'font-size':settings.textSize + 'px'}"
+                                style="text-decoration-line: line-through;-webkit-text-decoration-line: line-through;">({{image.oldPrice}}&nbsp;{{settings.price.unit}})</p>
+                    </div>
+                   
+                </div>
+                <div ng-show="!showLine && showDivPrices">
+                    <div ng-if="image.price!='0' && image.cropped!= ''" class="divPrices">
+                        <p ng-style="{'color':settings.price.textColor,'font-family':settings.font.name,'font-size':settings.textSize + 'px'}">{{image.price}}&nbsp;{{settings.price.unit}}</p>
+                        <p ng-if="image.oldPrice!='0'" ng-style="{'color':settings.price.textColor,'font-family':settings.font.name,'font-size':settings.textSize + 'px'}"
+                            style="text-decoration-line: line-through;-webkit-text-decoration-line: line-through;">({{image.oldPrice}}&nbsp;{{settings.price.unit}})</p>
+                    </div>
+                </div>
+                <div>
+                    <a ng-style="{'background-color': settings.button.bgColor,'color': settings.button.textColor,'font-family': settings.font.name,'font-size': settings.button.textSize + 'px'}"
+                        ng-click="openLink(image)" href="" class="btn-widget" data-track-name="flip_gallery">{{settings.button.text}}</a>
+                </div>
+            </figcaption>
+        </figure>
+    </div>
+</div>

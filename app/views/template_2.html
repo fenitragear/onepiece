@@ -1,0 +1,23 @@
+<div class="template">
+    <div class="header">
+        <netLogo ng-click="changeUrl('logo')" settings="logoData" ng-class="{active : currentUrl == 'logo'}"></netLogo>
+
+        <netTitle ng-click="changeUrl('title')"  settings="titleData"  ng-class="{active : currentUrl == 'title'}"></netTitle>
+
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+
+    <netStores ng-click="changeUrl('stores')"  settings="textData" ng-class="{active : currentUrl == 'stores'}"></netStores>
+
+    <netCgu  ng-click="changeUrl('cgu')" settings="cguData" ng-class="{active : currentUrl == 'cgu'}"></netCgu>
+
+    <netSlider ng-click="changeUrl('slider')"  settings="sliderData"  ng-class="{active : currentUrl == 'slider'}"></netSlider>
+
+    <netText ng-click="changeUrl('text')"  settings="textData" ng-class="{active : currentUrl == 'text'}"></netText>
+    
+    <netForm  ng-click="changeUrl('form')" ng-if="formData.layouts.position.id == 2"  settings="formData" ng-class="{active : currentUrl == 'form'}" class="component row offers"></netForm>
+ 			
+  	 
+  
+</div>

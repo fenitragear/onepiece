@@ -1,0 +1,313 @@
+<div class="col-xs-12" ng-controller="StoresSettingsCtrl">
+    <div class="form-group no-padder m-t-md">
+        <div class="col-xs-4 control-label text-left no-padder">{{geolocTypeText}}</div>
+        <div class="col-xs-2"><div ng-model="displayed" ng-click="displayed = !displayed" ios-switch></div></div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="form-group no-padder m-t-md">
+        <div class="col-xs-4 control-label text-left no-padder">Type</div>
+        <div class="col-xs-8">
+            <select class="form-control" ng-model="geolocType">
+                <option ng-selected="{{itemType.value == geolocType}}" value="{{itemType.value}}" ng-repeat="itemType in itemTypes ">{{itemType.name}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <br>
+    <div class="col-xs-10 col-xs-offset-1" data-ng-class="{'hide' : hasStores || geolocType=='custom'}">
+        <input type="file" id="stores-src" class="form-control stores-src" />
+    </div>
+    <div class="clearfix"></div>
+    <br>
+    <div class="col-xs-8 col-xs-offset-2 panel-success panel panel-body alert-success text-center m-b-none" data-ng-class="{'hide' : !hasStores || geolocType=='custom' }" style="margin-top:10px;padding: 10px">
+        <span class="biggerBold">{{storesData.length}}</span> point{{storesData.length > 1 ? 's' : ''}} de vente importé{{storesData.length > 1 ? 's' : ''}}
+        <button ng-click="delete()" class="btn btn-danger btn-xs pull-right">
+            <i  class="glyphicon glyphicon-trash "></i>
+        </button>
+    </div>
+    <div class="clearfix"></div>
+    <div class="m-t-md no-padder" ng-show="geolocType == 'geo'">
+        <label class="control-label col-xs-1">
+            <i class="glyphicon glyphicon-map-marker m-t-md"></i>
+        </label>
+        <div class="col-xs-11">
+            <div class="input-group">
+                <input type="text" id="title" class="form-control input-sm" ng-model="title" ng-focus="inputSelected()">
+                <span class="input-group-btn">
+                    <button class="btn btn-sm btn-primary" ng-click="resetTitle()" type="button">Réinitialiser</button>
+                </span>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="m-t-md no-padder" ng-show="geolocType == 'custom'">
+        <label class="control-label col-xs-1">
+            <i class="glyphicon glyphicon-map-marker m-t-md"></i>
+        </label>
+        <div class="col-xs-11">
+            <div class="input-group">
+                <input type="text" id="title" class="form-control input-sm" ng-model="customStoreTitle" ng-focus="inputSelected()">
+                <span class="input-group-btn">
+                    <button class="btn btn-sm btn-primary btnReinit" ng-click="resetCustomTitle()" type="button">Réinitialiser</button>
+                </span>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="m-t-md no-padder" ng-show="geolocType == 'custom'">
+        <label class="control-label col-xs-1">
+            <i class="glyphicon glyphicon-home m-t-md"></i>
+        </label>
+        <div class="col-xs-11">
+            <div class="input-group">
+                <input type="text" id="customStoreName" placeholder="Nom du point de vente (en gras)" class="form-control input-sm" ng-model="customStoreName">
+                <span class="input-group-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle customgeobtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Personnalisation &nbsp;<span class="caret" ng-show="tagOptions.length > 0"></span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-right" ng-show="tagOptions.length > 0">
+                            <li ng-repeat="optionCstStoreName in tagOptions">
+                                <a href="" ng-click="insertText(optionCstStoreName.name, 'customStoreName')">{{optionCstStoreName.name}}</a>
+                            </li>
+                        </ul>
+                </span>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="m-t-md no-padder" ng-show="geolocType == 'custom'">
+        <label class="control-label col-xs-1">
+            <i class="glyphicon glyphicon-flag m-t-md"></i>
+        </label>
+        <div class="col-xs-11">
+            <div class="input-group">
+                <input type="text" id="customAdA" placeholder="Adresse 1" class="form-control input-sm" ng-model="customAdA">
+                <span class="input-group-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle customgeobtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Personnalisation &nbsp;<span class="caret" ng-show="tagOptions.length > 0"></span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-right" ng-show="tagOptions.length > 0">
+                            <li ng-repeat="optionCstAdA in tagOptions">
+                                <a href="" ng-click="insertText(optionCstAdA.name, 'customAdA')">{{optionCstAdA.name}}</a>
+                            </li>
+                        </ul>
+                </span>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="m-t-md no-padder" ng-show="geolocType == 'custom'">
+        <label class="control-label col-xs-1">
+            <i class="glyphicon glyphicon-flag m-t-md"></i>
+        </label>
+        <div class="col-xs-11">
+            <div class="input-group">
+                <input type="text" id="customAdB" placeholder="Adresse 2" class="form-control input-sm" ng-model="customAdB">
+                <span class="input-group-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle customgeobtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Personnalisation &nbsp;<span class="caret" ng-show="tagOptions.length > 0"></span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-right" ng-show="tagOptions.length > 0">
+                            <li ng-repeat="optionCstAdB in tagOptions">
+                                <a href="" ng-click="insertText(optionCstAdB.name, 'customAdB')">{{optionCstAdB.name}}</a>
+                            </li>
+                        </ul>
+                </span>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="m-t-md no-padder" ng-show="geolocType == 'custom'">
+        <label class="control-label col-xs-1">
+            <i class="glyphicon glyphicon-flag m-t-md"></i>
+        </label>
+        <div class="col-xs-11">
+            <div class="input-group">
+                <input type="text" id="customAdC" placeholder="Adresse 3" class="form-control input-sm" ng-model="customAdC">
+                <span class="input-group-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle customgeobtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Personnalisation &nbsp;<span class="caret" ng-show="tagOptions.length > 0"></span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-right" ng-show="tagOptions.length > 0">
+                            <li ng-repeat="optionCstAdC in tagOptions">
+                                <a href="" ng-click="insertText(optionCstAdC.name, 'customAdC')">{{optionCstAdC.name}}</a>
+                            </li>
+                        </ul>
+                </span>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="m-t-md no-padder" ng-show="geolocType == 'custom'">
+        <label class="control-label col-xs-1">
+            <i class="glyphicon glyphicon-flag m-t-md"></i>
+        </label>
+        <div class="col-xs-11">
+            <div class="input-group">
+                <input type="text" id="customPostalCode" placeholder="Code Postal" class="form-control input-sm" ng-model="customPostalCode">
+                <span class="input-group-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle customgeobtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Personnalisation &nbsp;<span class="caret" ng-show="tagOptions.length > 0"></span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-right" ng-show="tagOptions.length > 0">
+                            <li ng-repeat="optionCstPostalCode in tagOptions">
+                                <a href="" ng-click="insertText(optionCstPostalCode.name, 'customPostalCode')">{{optionCstPostalCode.name}}</a>
+                            </li>
+                        </ul>
+                </span>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="m-t-md no-padder" ng-show="geolocType == 'custom'">
+        <label class="control-label col-xs-1">
+            <i class="glyphicon glyphicon-flag m-t-md"></i>
+        </label>
+        <div class="col-xs-11">
+            <div class="input-group">
+                <input type="text" id="customTown" placeholder="Ville" class="form-control input-sm" ng-model="customTown">
+                <span class="input-group-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle customgeobtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Personnalisation &nbsp;<span class="caret" ng-show="tagOptions.length > 0"></span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-right" ng-show="tagOptions.length > 0">
+                            <li ng-repeat="optionCstTown in tagOptions">
+                                <a href="" ng-click="insertText(optionCstTown.name, 'customTown')">{{optionCstTown.name}}</a>
+                            </li>
+                        </ul>
+                </span>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="m-t-md no-padder" ng-show="geolocType == 'custom'">
+        <label class="control-label col-xs-1">
+            <i class="glyphicon glyphicon-phone m-t-md"></i>
+        </label>
+        <div class="col-xs-11">
+            <div class="input-group">
+                <input type="text" id="customPhone" placeholder="Téléphone" class="form-control input-sm" ng-model="customPhone">
+                <span class="input-group-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle customgeobtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Personnalisation &nbsp;<span class="caret" ng-show="tagOptions.length > 0"></span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-right" ng-show="tagOptions.length > 0">
+                            <li ng-repeat="optionCstPhone in tagOptions">
+                                <a href="" ng-click="insertText(optionCstPhone.name, 'customPhone')">{{optionCstPhone.name}}</a>
+                            </li>
+                        </ul>
+                </span>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="m-t-md no-padder" ng-show="geolocType == 'custom'">
+        <label class="control-label col-xs-1">
+            <i class="glyphicon glyphicon-time m-t-md"></i>
+        </label>
+        <div class="col-xs-11">
+            <div class="input-group">
+                <input type="text" id="customOpenHour" placeholder="Horaires d'ouverture" class="form-control input-sm" ng-model="customOpenHour">
+                <span class="input-group-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle customgeobtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Personnalisation &nbsp;<span class="caret" ng-show="tagOptions.length > 0"></span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-right" ng-show="tagOptions.length > 0">
+                            <li ng-repeat="optionCstOpenHour in tagOptions">
+                                <a href="" ng-click="insertText(optionCstOpenHour.name, 'customOpenHour')">{{optionCstOpenHour.name}}</a>
+                            </li>
+                        </ul>
+                </span>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="m-t-md no-padder" ng-show="geolocType == 'custom'">
+        <label class="control-label col-xs-1">
+            <i class="glyphicon glyphicon-tags m-t-md"></i>
+        </label>
+        <div class="col-xs-11">
+            <div class="input-group">
+                <input type="text" id="customLatitude" placeholder="Latitude" class="form-control input-sm" ng-model="customLatitude">
+                <span class="input-group-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle customgeobtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Personnalisation &nbsp;<span class="caret" ng-show="tagOptions.length > 0"></span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-right" ng-show="tagOptions.length > 0">
+                            <li ng-repeat="optionCstLatitude in tagOptions">
+                                <a href="" ng-click="insertText(optionCstLatitude.name, 'customLatitude')">{{optionCstLatitude.name}}</a>
+                            </li>
+                        </ul>
+                </span>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="m-t-md no-padder" ng-show="geolocType == 'custom'">
+        <label class="control-label col-xs-1">
+            <i class="glyphicon glyphicon-tags m-t-md"></i>
+        </label>
+        <div class="col-xs-11">
+            <div class="input-group">
+                <input type="text" id="customLongitude" placeholder="Longitude" class="form-control input-sm" ng-model="customLongitude">
+                <span class="input-group-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle customgeobtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Personnalisation &nbsp;<span class="caret" ng-show="tagOptions.length > 0"></span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-right" ng-show="tagOptions.length > 0">
+                            <li ng-repeat="optionCstLongitude in tagOptions">
+                                <a href="" ng-click="insertText(optionCstLongitude.name, 'customLongitude')">{{optionCstLongitude.name}}</a>
+                            </li>
+                        </ul>
+                </span>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="m-t-md no-padder" data-ng-class="{'hide' : geolocType=='custom'}">
+        <label class="control-label col-xs-1">
+            <i class="glyphicon glyphicon-globe m-t-md"></i>
+        </label>
+        <div class="col-xs-11">
+            <div class="input-group geo-allstrores-input">
+                <input type="text" class="form-control input-sm" ng-model="allStoreTitle">
+                <span class="input-group-btn" ng-show="geolocType == 'geo'">
+                    <button class="btn btn-sm btn-primary" ng-click="resetAllStoreTitle()" type="button">Réinitialiser</button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <hr class="storeSeparator" />
+    <div class="clearfix"></div>
+    <div data-ng-class="{'hide' : geolocType=='custom'}">
+        <p><strong>Importez la liste de vos points de vente</strong></p>
+
+        <p>Une fois géolocalisés, vos clients/prospects seront orientés vers le point de vente le + proche.</p>
+    
+        <p>
+            Ils auront alors accès à :<br />
+            - L’adresse du point de vente le + proche<br />
+            - Le N° de téléphone<br />
+            - L’itinéraire pour s’y rendre (piétons / voiture / transports)<br />
+            - La liste de tous vos points de vente (coordonnées & carte)<br />
+            - Les horaires d'ouverture (facultatif)<br />
+        </p>
+    
+        <p>Votre liste doit contenir les coordonnées GPS de chaque points de vente <u>avec les en-t&ecirc;tes</u>. <a href="../server/service/geoloc.csv" target="_blank">Voir le fichier modèle (.csv)</a></p>
+    
+        <p><img src="img/magasins.png" width="100%" /></p>
+    </div>
+    
+</div>

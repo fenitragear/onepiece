@@ -1,0 +1,278 @@
+<div>
+    <div class="col-xs-12 settings_header panel-heading">
+        <div class="settings_title">
+            <a ng-click="previous()" class="navigation">
+                <i class="glyphicon glyphicon-chevron-left pull-left"></i>
+            </a>
+            <a ng-click="next()" class="navigation">
+                <i class="glyphicon glyphicon-chevron-right pull-right"></i>
+            </a>
+            Mes images
+        </div>
+    </div>
+
+    <div class="col-xs-12 panel-body settings_body">
+            <div class="form-group no-padder">
+                   
+                <div class="col-xs-4 control-label text-left no-padder">Afficher le bloc diaporama</div>
+                <div class="col-xs-2"><div ng-init="showSlider = (showSlider.toString() == 'true' ? true : false)" ng-model="showSlider" ng-click="showSlider = !showSlider" ios-switch></div></div>
+                <div class="col-xs-6"></div>
+            </div>
+            <div class="clear"></div>
+            <br/>
+            <div id="sortable-container">
+                <div class="sortable-row" as-sortable="sortableOptions" ng-model="imageList">
+                    <div class="slider_img" ng-repeat="image in imageList" as-sortable-item>
+                        <div class="link_banner" ng-class= "{link_banner_red: (image.formLink === 'true' || image.formLink === true)}" ng-hide="!image.link.length > 0"></div> 
+                        <div class="image_handler m-b-md" style="background-image : url('{{image.src}}')" as-sortable-item-handle>
+                            <div class="image_remove_handler" ng-if="!show">
+                                <i class="btn-hover-handler trash glyphicon glyphicon-trash" ng-click="delete(image)"></i>
+                                <span class="btn-hover-handler fa fa-cogs cogs" ng-click="openDesc(image)"></span><span class="btn-hover-handler link " ng-show="show" ng-click="openLink(image)"></span>
+                            </div>
+                            <div class="image_remove_handler" ng-if="show">
+                                <i class="btn-hover-handler trash glyphicon glyphicon-trash" ng-click="delete(image)"></i>
+                                 <span class="btn-hover-handler link " ng-click="openLink(image)"></span>
+                            
+                                </div>
+                        </div>
+                        <progressbar class="text-center" value="image.progress" max="100" ng-show="image.progress > 0 && image.progress < 100"></progressbar>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-10 col-xs-offset-1">
+                <input type="file" id="logo-src" class="form-control"  multiple/>
+            </div>
+            <div class="clear"></div>
+            <br/> 
+
+            <div class="form-group no-padder">
+                <div class="col-xs-4 control-label text-left no-padder">Type</div>
+                <div class="col-xs-6">
+                    <select class="form-control" ng-model="sliderType">
+                        <option ng-selected="{{itemType == sliderType}}" value="{{itemType}}" ng-repeat="itemType in itemTypes ">{{itemType}}</option>
+                    </select>
+                </div>
+                <div class="col-xs-2"></div>
+            </div>
+            <div class="clear"></div>
+
+            <div ng-show="show">
+                <div class="form-group no-padder">
+                    <div class="col-xs-4 control-label text-left no-padder">Effets de transition</div>
+                    <div class="col-xs-6">
+                        <select class="form-control" ng-model="effect">
+                            <option ng-selected="{{itemEffect == effect}}" value="{{itemEffect}}" ng-repeat="itemEffect in itemEffects ">{{itemEffect}}</option>
+                        </select>
+                    </div>
+                    <div class="col-xs-2"></div>
+                </div>
+                <div class="clear"></div>
+                <br/>
+                <div class="form-group no-padder">
+                    <div class="col-xs-4 control-label text-left no-padder">Déclenchement automatique</div>
+                    <div class="col-xs-2"><div ng-init="automatic = (automatic.toString() == 'true' ? true : false)" ng-model="automatic" ng-click="automatic = !automatic" ios-switch></div></div>
+                </div>
+    
+                <div class="clear"></div>
+                <br/>
+    
+                <div class="form-group no-padder" ng-show="automatic.toString() == 'true'">
+                    <div class="col-xs-4 control-label text-left no-padder">Défilement en boucle</div>
+                    <div class="col-xs-2"><div ng-init="loop = (loop.toString() == 'true' ? true : false)" ng-model="loop" ng-click="loop = !loop" ios-switch></div></div>
+                </div>
+    
+                <div class="clear"></div>
+                <br/>
+            </div>
+            <div ng-show="!show">     
+                <div class="form-group no-padder">
+                    <div class="col-xs-4 control-label text-left no-padder">Format de l’image</div>
+                    <div class="col-xs-6">
+                        <select class="form-control" ng-model="imageFormat">
+                            <option ng-selected="{{format.value == imageFormat}}" value="{{format.value}}" ng-repeat="format in imageFormats ">{{format.name}}</option>
+                        </select>
+                    </div>
+                    <div class="col-xs-2"></div>
+                </div>
+                <div class="clear"></div>
+                <br/>           
+                <div class="form-group no-padder">
+                    <div class="col-xs-4 control-label text-left no-padder">Nombre d'images par ligne</div>
+                    <div class="col-xs-6">
+                        <input class="nbImagesSlider" type="text" />
+                    </div>
+                    <div class="col-xs-2"></div>
+                </div>
+                <div class="clear"></div>
+                <br/> 
+                <br/> 
+
+                <div class="form-group no-padder">
+                    <div class="col-xs-4 control-label text-left no-padder">
+                        Espacement entre les images
+                    </div>
+                    <div class="col-xs-6">
+                        <input class="spaceSizeSlider" style="width: 230px;" type="text" />
+                    </div>
+                    <div class="col-xs-2"></div>
+                </div>   
+                <div class="clear"></div>
+                <br/> 
+                <br/> 
+
+                <div class="form-group no-padder">
+                    <div class="col-xs-4 control-label text-left no-padder">
+                        Couleur de fond
+                    </div>
+                    <div class="col-xs-6">
+                        <div id="color_primary" class="colorpicker bgColor"  ng-style="{'background-color' : bgColor}"></div>
+                    </div>
+                    <div class="col-xs-2"></div>
+                </div>   
+                
+                <div class="clear"></div>
+                <br/> 
+
+                <div class="form-group no-padder">
+                    <div class="col-xs-4 control-label text-left no-padder">Police</div>
+                    <div class="col-xs-6">
+                        <select class="form-control" ng-model="fontname" ng-style="{'font-family': fontname}">
+                            <option ng-selected="{{fontName == fontname}}" ng-style="{'font-family': fontName}" value="{{fontName}}" ng-repeat="fontName in fontNames ">{{fontName}}</option>
+                        </select>
+                    </div>
+                    <div class="col-xs-2"></div>
+                </div>
+    
+                <div class="clear"></div>
+                <br/> 
+                
+                <div class="form-group no-padder">
+                    <div class="col-xs-4 control-label text-left no-padder">
+                        Taille des textes
+                    </div>
+                    <div class="col-xs-6">
+                        <input class="textSizeSlider" style="width: 134px;" type="text" />
+                    </div>
+                    <div class="col-xs-2"></div>
+                </div>   
+                
+                <div class="clear"></div>
+                <br/> 
+    
+                <b>Bouton</b>
+                <div class="clear"></div>
+                <br/>
+    
+                <div class="form-group no-padder">
+                    <div class="col-xs-4 control-label text-left no-padder">Libellé du bouton</div>
+                    <div class="col-xs-6">
+                        <input class="form-control" type="text" ng-model="button.text"/>
+                    </div>
+                    <div class="col-xs-2"></div>
+                </div>
+                <div class="clear"></div>
+                <br/>
+    
+                <div class="form-group no-padder">
+                    <div class="col-xs-4 control-label text-left no-padder">
+                        Couleur du bouton
+                    </div>
+                    <div class="col-xs-6">
+                        <div id="color_primary" class="colorpicker buttonBgColor"  ng-style="{'background-color' : button.bgColor}"></div>
+                    </div>
+                    <div class="col-xs-2"></div>
+                </div>   
+                
+                <div class="clear"></div>
+                <br/> 
+    
+                <div class="form-group no-padder">
+                    <div class="col-xs-4 control-label text-left no-padder">
+                        Couleur du texte du bouton
+                    </div>
+                    <div class="col-xs-6">
+                        <div id="color_primary" class="colorpicker buttonTextColor"  ng-style="{'background-color' : button.textColor}"></div>
+                    </div>
+                    <div class="col-xs-2"></div>
+                </div>   
+                
+                <div class="clear"></div>
+                <br/>
+                
+    
+                <div class="form-group no-padder">
+                    <div class="col-xs-4 control-label text-left no-padder">
+                       Taille texte du bouton
+                    </div>
+                    <div class="col-xs-6">
+                        <input class="buttonTextSizeSlider" style="width: 134px;" type="text" />
+                    </div>
+                    <div class="col-xs-2"></div>
+                </div>   
+                
+                <div class="clear"></div>
+                <br/> 
+    
+                <b>Description</b>
+                <div class="clear"></div>
+                <br/>
+    
+                <div class="form-group no-padder">
+                    <div class="col-xs-4 control-label text-left no-padder">
+                        Couleur du texte
+                    </div>
+                    <div class="col-xs-6">
+                        <div id="color_primary" class="colorpicker descriptionTextColor"  ng-style="{'background-color' : description.textColor}"></div>
+                    </div>
+                    <div class="col-xs-2"></div>
+                </div>   
+                
+                <div class="clear"></div>
+                <br/>
+    
+                <b>Prix</b>
+                <div class="clear"></div>
+                <br/>
+    
+                <div class="form-group no-padder">
+                    <div class="col-xs-4 control-label text-left no-padder">
+                        Couleur du texte prix
+                    </div>
+                    <div class="col-xs-6">
+                        <div id="color_primary" class="colorpicker priceTextColor"  ng-style="{'background-color' : price.textColor}"></div>
+                    </div>
+                    <div class="col-xs-2"></div>
+                </div>   
+                
+                <div class="clear"></div>
+                <br/>
+    
+                <div class="form-group no-padder">
+                    <div class="col-xs-4 control-label text-left no-padder">Unité</div>
+                    <div class="col-xs-6">
+                        <select class="form-control" ng-model="unit">
+                            <option ng-selected="{{itemUnit == unit}}" value="{{itemUnit}}" ng-repeat="itemUnit in itemUnits ">{{itemUnit}}</option>
+                        </select>
+                    </div>
+                    <div class="col-xs-2"></div>
+                </div>
+    
+                <div class="clear"></div>
+                <br/> 
+    
+                <div class="form-group no-padder" ng-show="showOther">
+                    <div class="col-xs-4 control-label text-left no-padder"></div>
+                    <div class="col-xs-6">
+                        <input class="form-control" type="text" ng-model="price.unit" ng-trim="false"/>
+                    </div>
+                    <div class="col-xs-2"></div>
+                </div>
+    
+                <div class="clear"></div>
+                <br/>
+            </div>
+           
+        </div>
+    </div>
+</div>

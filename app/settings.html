@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en" ng-app="netMessage" ng-controller="settingsCtrl">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+	<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+	<META HTTP-EQUIV="EXPIRES" CONTENT="Mon, 22 Jul 2002 11:12:01 GMT">
+
+	<title ng-bind="options.title">Voir mon offre</title>
+	<style>
+		#loading {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 1000;
+			background: #FFFFFF;
+			-webkit-backface-visibility: hidden;
+			backface-visibility: hidden;
+		}
+	</style>
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<link rel="stylesheet" href="css/app.css?version=19">
+	<!--<link rel="stylesheet" href="bootstrap/css/bootstrap.css?version=18" />-->
+	<!--<link rel="stylesheet" href="bootstrap/css/bootstrap3.min.css?version=18" />-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="bootstrap/css/bootstrap-datetimepicker.min.css?version=18">
+	<link rel="stylesheet" href="js/libs/ui-switch.min.css?version=18" />
+	<link rel="stylesheet" href="js/libs/codemirror/codemirror.css?version=18" />
+	<link rel="stylesheet" href="bootstrap/colorpicker/css/colpick.css?version=18" />
+	<link rel="stylesheet" href="bootstrap/multi-select/css/bootstrap-multiselect.css?version=18" />
+	<link rel="stylesheet" href="js/libs/sortable.css?version=18" />
+	<link rel="stylesheet" href="js/libs/slider.css?version=18" />
+	<link rel="stylesheet" href="bootstrap/bootstrap-select.min.css" />
+	<link rel="stylesheet" href="bootstrap/datepicker/bootstrap-datepicker.css" />
+	<link rel="stylesheet" href="bootstrap/bootstrap-select.min.css" />
+	<link rel="stylesheet" href="css/jquery.mobile.flip.min.css" />
+    <link rel="stylesheet" href="css/croppie.css"/>
+	<link rel="stylesheet" href="css/slick.css"/>
+	<link rel="stylesheet" href="css/slick-theme.css"/>
+	<link rel="stylesheet" href="css/fontawesome.min.css"/>
+	<style type="text/css">
+		.slider {  width: 50%;  margin: 100px auto;  }
+		.slick-slide {  margin: 0px 20px;  }
+		.slick-slide img {  width: 100%;  }
+		.slick-prev:before,
+		.slick-next:before {  color: black;  }
+		.slick-slide {  transition: all ease-in-out .3s; /*opacity: .2;*/  }
+		.slick-active { /*opacity: .5;*/  }
+		.slick-current { /*opacity: 1;*/  }
+	</style>
+</head>
+<body class="body_settings">
+	<div id="loading" ng-hide="!nosettings"></div>
+	<div class="body_subheader">
+		<span>Choisissez le modèle de landing page souhaité</span>
+	</div>
+	<div class="wrapper_body">
+		<div class="row ct-template-wrap regular slick">
+			<div class="col-md-2">
+				<div id="slider" class="tel" ng-click="checkrb('slider')">
+					<div class="img">
+						<img src="img/template_slider.png" />
+					</div>
+					<div class="title">
+						<input type="radio" value="slider" name="template" id="rb_slider" ng-model="template" ng-hide="template!='slider'" ng-checked="template=='slider'"
+						/>&nbsp;
+						<div class="check"></div>
+						<label for="rb_slider" id="label_slider">SMS DIAPORAMA</label>
+					</div>
+					<div class="more">
+						<a class="morelink" href="#" data-trigger="manual" data-html="true" data-placement="top" data-toggle="popover" data-title="Landing page composée de"
+						 data-content="<ul><li>Titre & couleurs</li><li>Mon logo</li><li>Mon offre</li><li>Mes images / photos</li><li>Géolocalisation / Liste des points de vente</li><li>Autre parapraphe (texte libre)</li></ul>">En savoir plus</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div id="customcountdown" class="tel" ng-click="checkrb('customcountdown')">
+					<div class="img">
+						<img src="img/template_cab.png" />
+					</div>
+					<div class="title ct-title">
+						<input type="radio" value="customcountdown" name="template" id="rb_customcountdown" ng-model="template" ng-hide="template!='customcountdown'"
+							   ng-checked="template=='customcountdown'" />&nbsp;
+						<div class="check ct-check"></div>
+						<label for="rb_customcountdown" id="label_customcountdown">SMS COMPTE A REBOURS</label>
+					</div>
+					<div class="more">
+						<a class="morelink" href="#" data-trigger="manual" data-html="true" data-placement="top" data-toggle="popover" data-title="Landing page composée de"
+						   data-content="<ul><li>Titre & couleurs</li><li>Mon logo</li><li>Mon offre</li><li>Mes images / photos</li><li>Compte à rebours</li><li>Géolocalisation / Liste des points de vente</li><li>Autre parapraphe (texte libre)</li></ul>">En savoir plus</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div id="video" class="tel" ng-click="checkrb('video')">
+					<div class="img">
+						<img src="img/template_video.png" />
+					</div>
+					<div class="title">
+						<input type="radio" value="video" name="template" id="rb_video" ng-model="template" ng-hide="template!='video'" ng-checked="template=='video'"
+						/>&nbsp;
+						<div class="check"></div>
+						<label for="rb_video" id="label_video">SMS VIDEO</label>
+					</div>
+					<div class="more">
+						<a class="morelink" href="#" data-trigger="manual" data-html="true" data-placement="top" data-toggle="popover" data-title="Landing page composée de"
+						 data-content="<ul><li>Titre & couleurs</li><li>Mon logo</li><li>Mon offre</li><li>Ma vidéo</li><li>Texte libre</li><li>Autre parapraphe (texte libre)</li></ul>">En savoir plus</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div id="scratch" class="tel" ng-click="checkrb('scratch')">
+					<div class="img">
+						<img src="img/template_scratch.png" />
+					</div>
+					<div class="title">
+						<input type="radio" value="scratch" name="template" id="rb_scratch" ng-model="template" ng-hide="template!='scratch'"
+						 ng-checked="template=='scratch'" />&nbsp;
+						<div class="check"></div>
+						<label for="rb_scratch" id="label_scratch">SMS A GRATTER</label>
+					</div>
+					<div class="more">
+						<a class="morelink" href="#" data-trigger="manual" data-html="true" data-placement="top" data-toggle="popover" data-title="Landing page composée de"
+						 data-content="<ul><li>Titre & couleurs</li><li>Mon logo</li><li>Mon offre</li><li>SMS à gratter</li><li>Texte libre</li></ul>">En savoir plus</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div id="form" class="tel" ng-click="checkrb('form')">
+					<div class="img">
+						<img src="img/template_form.png" />
+					</div>
+					<div class="title">
+						<input type="radio" value="form" name="template" id="rb_form" ng-model="template" ng-hide="template!='form'" ng-checked="template=='form'"
+						/>&nbsp;
+						<div class="check"></div>
+						<label for="rb_form" id="label_form">SMS FORMULAIRE</label>
+					</div>
+					<div class="more">
+						<a class="morelink" href="#" data-trigger="manual" data-html="true" data-placement="top" data-toggle="popover" data-title="Landing page composée de"
+						 data-content="<ul><li>Titre & couleurs</li><li>Mon logo</li><li>Mon offre</li><li>Formulaire</li></ul>">En savoir plus</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div id="smssecouer" class="tel" ng-click="checkrb('smssecouer')">
+					<div class="img">
+						<img src="img/template_smssecouer.png" />
+					</div>
+					<div class="title">
+						<input type="radio" value="smssecouer" name="template" id="rb_form" ng-model="template" ng-hide="template!='smssecouer'"
+						 ng-checked="template=='smssecouer'" />&nbsp;
+						<div class="check"></div>
+						<label for="rb_form" id="label_form">SMS A SECOUER</label>
+					</div>
+					<div class="more">
+						<a class="morelink" href="#" data-trigger="manual" data-html="true" data-placement="top" data-toggle="popover" data-title="Landing page composée de"
+						 data-content="<ul><li>Titre & couleurs</li><li>Mon logo</li><li>Mon offre</li><li>SMS à secouer</li><li>Texte libre</li></ul>">En savoir plus</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div id="default" class="tel" ng-click="checkrb('default')">
+					<div class="img">
+						<img src="img/template_default.png" />
+					</div>
+					<div class="title">
+						<input type="radio" value="default" name="template" id="rb_default" ng-model="template" ng-hide="template!='default'"
+						 ng-checked="template=='default'" />&nbsp;
+						<div class="check"></div>
+						<label for="rb_default" id="label_default">SMS VIERGE</label>
+					</div>
+					<div class="more">
+						<a class="morelink" href="#" data-trigger="manual" data-html="true" data-placement="top" data-toggle="popover" data-title="Landing page composée de"
+						 data-content="toutes les rubriques">En savoir plus</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row action">
+			<ul class="nav pull-right">
+				<li>
+					<a id="nextButton" href="#" ng-click="next()" ng-hide="template==''">Suivant
+						<i class="glyphicon glyphicon-play"></i>
+					</a>
+					<li>
+			</ul>
+		</div>
+	</div>
+	<script src="js/utils.js?version=18"></script>
+	<script src="js/libs/jquery-1.11.0.min.js?version=18"></script>
+	<script src="js/libs/jquery.mobile.flip.js"></script>
+	<!--<script src="bootstrap/js/bootstrap.min.js?version=18"></script>-->
+	<!--<script src="bootstrap/js/bootstrap3.min.js?version=18"></script>-->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="bootstrap/bootstrap-datetimepicker.min.js?version=18"></script>
+	<script src="bootstrap/moment.js?version=18"></script>
+	<script src="bootstrap/bootstrap-datetimepicker.fr.js?version=18"></script>
+	<script src="bootstrap/wysiwyg/dist/summernote.js?version=18"></script>
+	<script src="bootstrap/wysiwyg/dist/lang-fr-FR.js?version=18"></script>
+	<script src="bootstrap/colorpicker/js/colpick.js?version=18"></script>
+	<!--<script src="js/scratch.min.js"></script>-->
+	<script src="js/wScratchPad.min.js"></script>
+	<script src="js/libs/swiper.min.js"></script>
+	<script src="js/angular/angular.min.js?version=18" type="text/javascript"></script>
+	<script src="js/angular/angular-route.min.js?version=18"></script>
+	<script src="js/angular/angular-touch.min.js?version=18"></script>
+	<script src="js/angular/angular-sanitize.min.js?version=18"></script>
+	<script src="js/angular/angular-animate.min.js?version=18"></script>
+	<script src="js/angular/bootstrap-datepicker.js?version=18"></script>
+	<script src="js/angular/ng-clipboard.js?version=18"></script>
+	<!--<script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAs3zh1-oNO3jkRqhJusSkZOkNmAkZlpbc'></script>-->
+	<script src='js/libs/googlemaps.js'></script>
+	<script src="bootstrap/lodash.js?version=18"></script>
+	<script src="bootstrap/angular-google-maps.js?version=18"></script>
+	<script src="bootstrap/fileinput/js/fileinput.js?version=18"></script>
+	<script src="bootstrap/bootstrap-ui.min.js?version=18"></script>
+	<script src="js/libs/froogaloop2.min.js"></script>
+	<script src="js/libs/ng-videosharing-embed.min.js?version=20"></script>
+	<script src="bootstrap/datepicker/bootstrap-datepicker.js"></script>
+
+	<script src="js/app.js?version=19"></script>
+	<script src="js/controllers/mainCtrl.js?version=19"></script>
+	<script src="js/controllers/pageCtrl.js?version=18"></script>
+	<script src="js/controllers/settingsCtrl.js?version=18"></script>
+	<script src="js/filters.js?version=18"></script>
+	<script src="js/directive.js?version=18"></script>
+	<script src="js/libs/angular-slider.js?version=18"></script>
+	<script src="js/libs/ui-switch.min.js?version=18"></script>
+	<script src="js/libs/multiselect.js?version=18"></script>
+	<script src="js/libs/timelist.js?version=18"></script>
+	<script src="js/libs/sortable.js?version=18"></script>
+	<script src="js/libs/slider.js?version=18"></script>
+	<script src="js/libs/customselect.js?version=18"></script>
+	<script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
+	<script src="js/libs/shake.js?version=18"></script>
+	<script src="js/ckeditor/ckeditor.js?version=18"></script>
+    <script src="js/libs/JsBarcode.all.js"></script>
+
+	<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+	<!--<script src="https://cdn.jsdelivr.net/npm/angular-swiper@0.4.0/dist/angular-swiper.min.js"></script>-->
+
+	<script src="components/templateComponent/templateComponent.js?version=19"></script>
+	<script src="components/mapComponent/mapComponent.js?version=18"></script>
+
+	<script src="components/logoComponent/logoComponent.js?version=18"></script>
+	<script src="components/logoComponent/logoSettings.js?version=18"></script>
+
+	<script src="components/videoComponent/videoComponent.js?version=19"></script>
+	<script src="components/videoComponent/videoSettings.js?version=19"></script>
+
+	<script src="components/titleComponent/titleComponent.js?version=18"></script>
+	<script src="components/titleComponent/titleSettings.js?version=18"></script>
+
+	<script src="components/customcountdownComponent/customcountdownComponent.js?version=18"></script>
+	<script src="components/customcountdownComponent/customcountdownSettings.js?version=18"></script>
+
+	<script src="components/barcodeComponent/barcodeComponent.js?version=18"></script>
+	<script src="components/barcodeComponent/barcodeSettings.js?version=18"></script>
+	
+	<script src="components/sliderComponent/sliderComponent.js?version=18"></script>
+	<script src="components/sliderComponent/sliderSettings.js?version=18"></script>
+
+	<script src="components/scratchComponent/scratchComponent.js?version=18"></script>
+	<script src="components/scratchComponent/scratchSettings.js?version=18"></script>
+
+	<script src="components/shakeComponent/shakeComponent.js?version=18"></script>
+	<script src="components/shakeComponent/shakeSettings.js?version=18"></script>
+
+	<script src="components/textComponent/textComponent.js?version=18"></script>
+	<script src="components/textComponent/textSettings.js?version=18"></script>
+
+	<script src="components/storesComponent/storesSettings.js?version=18"></script>
+	<script src="components/storesComponent/storesComponent.js?version=18"></script>
+
+	<script src="components/cguComponent/cguComponent.js?version=18"></script>
+	<script src="components/cguComponent/cguSettings.js?version=18"></script>
+
+	<script src="components/optionsComponent/optionsSettings.js?version=18"></script>
+
+	<script src="components/formComponent/formComponent.js?version=18"></script>
+	<script src="components/formComponent/formSettings.js?version=18"></script>
+
+	<script src="components/expertModeComponent/expertModeSettings.js?version=18"></script>
+	<script src="js/libs/croppie.js"></script>
+
+	<script>
+		$(function () {
+			$(".morelink").hover(function () {
+				$(this).popover('toggle');
+			});
+
+			$('html').on('click', function (e) {
+				if (typeof $(e.target).data('original-title') == 'undefined') {
+					$('[data-original-title]').popover('hide');
+				}
+			});
+
+            $(".regular").slick({
+                dots: false,
+                infinite: false,
+                slidesToShow: 5,
+                slidesToScroll: 1
+            });
+		});
+
+	</script>
+
+</body>
+
+</html>

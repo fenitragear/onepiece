@@ -1,0 +1,4 @@
+<div class="hide" id="templateDiv">
+    <div ng-hide="modeSettings.modeType == 2" id="regularModeSourceCode" ng-include src="'views/template_'+ templateid + '.html?1'"></div>
+    <div ng-hide="modeSettings.modeType == 1" ng-bind-html="sourceCode | unsafe"></div>
+</div>

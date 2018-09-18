@@ -1,0 +1,365 @@
+
+<div ng-controller="FormSettingsCtrl">
+    <div class="form-group no-padder">
+        <div class="row">
+            <div class="form-group col-md-12">
+                <strong>Liste des champs / questions</strong>
+
+                <div class="dropdown pull-right">
+                    <button class="btn btn-primary dropdown-toggle btn-xs" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <i class="glyphicon glyphicon-plus "></i>
+                        <span class="caret"></span>
+                    </button>
+
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li ng-repeat="newField in suggestFormFields track by $index">
+                            <a href="" ng-click="addFormField(newField)"> {{newField.name}}</a>
+                        </li>
+                        <li role="separator" class="divider"></li>
+                        <li>
+                            <a href="" ng-click="addFormField(false)">Autre</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="sortableContainer" class="container col-xs-12">
+            <ul ng-model="sortableFormFields" class="list-unstyled" as-sortable="sortableOptions">
+                <li ng-repeat="item in formFields track by $index" as-sortable-item  as-sortable-placeholder>
+                    <div class="row cust" ng-mouseenter="item.iconDivider=true" ng-mouseleave="item.iconDivider=false">
+                        <div class="row" as-sortable-item-handle>
+                            <div class="col-cust">
+                                <button class="btn btn-primary btn-xs pull-right" ng-click="showEditField(item); item.showEditFieldBtn = !item.showEditFieldBtn" ng-switch on="item.type">
+                                    <i class="glyphicon glyphicon-comment" ng-switch-when="1"></i>
+                                    <i class="glyphicon glyphicon-envelope" ng-switch-when="2"></i>
+                                    <i class="glyphicon glyphicon-record" ng-switch-when="3"></i>
+                                    <i class="glyphicon glyphicon-check" ng-switch-when="4"></i>
+                                    <i class="glyphicon glyphicon-calendar" ng-switch-when="5"></i>
+                                    <i class="glyphicon glyphicon-list-alt" ng-switch-when="6"></i>
+                                    <i class="glyphicon glyphicon-align-justify" ng-switch-when="7"></i>
+                                    <i class="glyphicon glyphicon-earphone" ng-switch-when="8"></i>
+                                    <i class="glyphicon glyphicon-time" ng-switch-when="9"></i>
+                                    <i class="glyphicon glyphicon-transfer" ng-switch-when="10"></i>
+                                    <i class="glyphicon glyphicon-tasks" ng-switch-default></i>
+                                </button>
+                            </div>
+                            <div class="col-cust bg">
+                                <div ng-show="!item.showEditFieldBtn">
+                                    {{item.name}}<span ng-if="item.isRequired.toString() == 'true' ">*</span>
+                                </div>
+                                <div ng-show="item.showEditFieldBtn">
+                                    <div style="margin-top: -5px;padding-bottom: 5px;">
+                                        <input  type="text" ng-init="item.tempName = item.name" ng-model="item.tempName" class="form-control" />
+                                    </div>
+                                </div>
+                                <div ng-show="item.editNameBtn">
+                                    <div style="margin-top: -5px;padding-bottom: 5px;">
+                                        <input  type="text"  ng-model="item.name" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-cust md">
+                                <div ng-init="item.switchBtn = (item.disableField.toString() == 'true' ? true : false)" ng-model="item.switchBtn"  ng-click="item.switchBtn = !item.switchBtn; switchDisableField(item)" on="'Visible'" off="'Caché'" ios-switch></div>
+                            </div>
+                            <div class="col-cust">
+                                <button ng-click="showEditField(item); item.showEditFieldBtn = !item.showEditFieldBtn" ng-init="item.showEditFieldBtn = false" ng-model="item.showEditFieldBtn" class="btn btn-primary btn-xs">
+                                    <i class="glyphicon glyphicon-pencil"></i>
+                                </button>
+                            </div>
+                            <div class="col-cust">
+                                <button ng-click="confirmDeleteModal(item)" class="btn btn-primary btn-xs">
+                                    <i class="glyphicon glyphicon-trash "></i>
+                                </button>
+                            </div>
+                            <div class="col-cust" ng-init="item.iconDivider = (pageDividerIds.indexOf(item.id) >=0 )" ng-show="(item.iconDivider || pageDividerIds.indexOf(item.id) >=0 )" ng-click="addPageDividerId(item.id);">
+                                <i class="glyphicon glyphicon-share-alt" style="cursor:pointer;"></i>
+                            </div>
+                        </div> 
+
+                        <div class="row form-border" ng-show="item.showEditFieldBtn">
+                            <br/>
+                            <form class="form-horizontal" role="form">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-xs-1"></div>  
+                                        <div class="col-xs-4 control-label text-left">Type de réponse :</div>
+                                        <div class="col-xs-4">
+                                            <select class="form-control" ng-init="item.tempType = item.type" ng-model="item.tempType">
+                                                <option ng-selected="{{obj.value  == item.tempType}}" value="{{obj.value}}" ng-repeat="obj in fieldTypes">{{obj.name}}</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-xs-1"></div>   
+                                        <div class="col-xs-1"></div> 
+                                    </div>
+                                </div>
+
+                                <div class="form-group" ng-if="(item.tempType == '1' || item.tempType == '7'  || item.tempType == '11')">
+                                    <div class="row">
+                                        <div class="col-xs-1"></div>  
+                                        <div class="col-xs-4 control-label text-left">Nombre de caractères :</div>
+                                        <div class="col-xs-2">
+                                            <input type="text" class="form-control" title="minimum" ng-init="item.tempTextMinChar = item.textMinChar" ng-model="item.tempTextMinChar" value="{{item.tempTextMinChar}}" />
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <input type="text" class="form-control" title="maximum" ng-init="item.tempTextMaxChar = item.textMaxChar" ng-model="item.tempTextMaxChar" value="{{item.tempTextMaxChar}}" />
+                                        </div>
+                                        <div class="col-xs-1"></div>   
+                                        <div class="col-xs-1"></div> 
+                                    </div>
+                                </div>
+
+                                <div class="form-group" ng-if="(item.tempType == '7')">
+                                    <div class="row">
+                                        <div class="col-xs-1"></div>
+                                        <div class="col-xs-4 control-label text-left">Nombre de lignes :</div>
+                                        <div class="col-xs-4">
+                                            <select class="form-control" ng-model="item.tempLineNumber">
+                                                <option ng-selected="{{n  == item.tempLineNumber}}" value="{{n}}" ng-repeat="n in getNumber(20)">{{n}}</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-xs-1"></div>
+                                        <div class="col-xs-1"></div> 
+                                    </div>
+                                </div>
+
+                                <div class="form-group" ng-if="(item.tempType == '10')">
+                                    <div class="row">
+                                        <div class="col-xs-1"></div>  
+                                        <div class="col-xs-4 control-label text-left">Minimum - Maximum :</div>
+                                        <div class="col-xs-2">
+                                            <input type="text" class="form-control" title="minimum" ng-model="item.tempSliderMin" />
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <input type="text" class="form-control" title="maximum" ng-model="item.tempSliderMax" />
+                                        </div>
+                                        <div class="col-xs-1"></div>   
+                                        <div class="col-xs-1"></div> 
+                                    </div>
+                                </div>
+
+                                <div class="form-group" ng-if="(item.tempType == '10')">
+                                    <div class="row">
+                                        <div class="col-xs-1"></div>  
+                                        <div class="col-xs-4 control-label text-left">Type :</div>
+                                        <div class="col-xs-4">
+                                            <select class="form-control" ng-model="item.tempSliderType">
+                                                <option ng-selected="{{1  == item.tempSliderType}}" value="1">Simple</option>
+                                                <option ng-selected="{{2  == item.tempSliderType}}" value="2">Double</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-xs-1"></div>
+                                        <div class="col-xs-1"></div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" ng-if="(item.tempType == '10')">
+                                    <div class="row">
+                                        <div class="col-xs-1"></div>
+                                        <div class="col-xs-4 control-label text-left">Intervalle :</div>
+                                        <div class="col-xs-4">
+                                            <input type="text" class="form-control" ng-model="item.tempSliderInterval" value="{{item.tempSliderInterval}}" />
+                                        </div>
+                                        <div class="col-xs-1"></div>
+                                        <div class="col-xs-1"></div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" ng-if="(item.tempType == '10')">
+                                    <div class="row">
+                                        <div class="col-xs-1"></div>
+                                        <div class="col-xs-4 control-label text-left">Unité :</div>
+                                        <div class="col-xs-4">
+                                            <select class="form-control" ng-model="item.tempUnit">
+                                                <option ng-selected="{{objUnit  == item.tempUnit}}" value="{{objUnit}}" ng-repeat="objUnit in fieldUnityTypes">{{objUnit}}</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-xs-2" ng-if="(item.tempUnit == 'Autre')">
+                                            <input type="text" class="form-control" ng-model="item.tempsliderUnitOtherVal"  />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" ng-if="(item.tempType == '9')">
+                                    <div class="row">
+                                        <div class="col-xs-1"></div>  
+                                        <div class="col-xs-4 control-label text-left">Heure de début :</div>
+                                        <div class="col-xs-4">
+                                            <input type="text" ng-model="item.tempTimeMin" />
+                                        </div>
+                                        <div class="col-xs-1"></div>
+                                        <div class="col-xs-1"></div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" ng-if="(item.tempType == '9')">
+                                    <div class="row">
+                                        <div class="col-xs-1"></div>  
+                                        <div class="col-xs-4 control-label text-left">Heure de fin :</div>
+                                        <div class="col-xs-4">
+                                            <input type="text" ng-model="item.tempTimeMax" ng-min="item.tempTimeMin" />
+                                        </div>
+                                        <div class="col-xs-1"></div>
+                                        <div class="col-xs-1"></div> 
+                                    </div>
+                                </div>
+
+                                <div class="form-group" ng-if="(item.tempType == '9')">
+                                    <div class="row">
+                                        <div class="col-xs-1"></div>  
+                                        <div class="col-xs-4 control-label text-left">Intervalle en minutes :</div>
+                                        <div class="col-xs-4">
+                                            <input type="number" class="form-control" ng-model="item.tempHourInterval" min="0" max="600" />
+                                        </div>
+                                        <div class="col-xs-1"></div>
+                                        <div class="col-xs-1"></div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" ng-if="(item.tempType == '3' || item.tempType == '4' || item.tempType == '6') && (item.showEditFieldBtn)" ng-model="item.tempResponse" ng-repeat="text in item.tempResponse track by $index">
+                                    <div class="row">
+                                        <div class="col-xs-1"></div>
+                                        <div class="col-xs-4 control-label text-left">
+                                            <div ng-if="$first">Réponse :</div>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <div class="input-group">
+                                                <span class="input-group-btn" ng-switch on="text.deleteIcon">
+                                                    <button class="btn btn-primary" type="button" ng-click="deleteFieldResponse(item.tempResponse, text)" ng-switch-when="true">
+                                                        <i class="glyphicon glyphicon-remove"></i>
+                                                    </button>
+                                                    <button class="btn btn-secondary" type="button" ng-switch-when="false">
+                                                        <i class="glyphicon glyphicon-remove" ></i>
+                                                    </button>
+                                                </span>
+
+                                                <input type="text" ng-model="text.text" class="form-control" placeholder="Réponse" />
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-2"></div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" ng-if="(item.tempType == '3' || item.tempType == '4' || item.tempType == '6') && (item.showEditFieldBtn)">
+                                    <div class="row">
+                                        <div class="col-xs-5 control-label text-left"></div>
+                                        <div class="col-xs-4">
+                                            <button ng-click="addFieldResponse(item.tempResponse)" class="btn btn-primary btn-xs">
+                                                <i class="glyphicon glyphicon-plus"></i>
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-2"></div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-xs-1"></div>
+                                        <div class="col-xs-4 control-label text-left">Champs obligatoire :</div>
+                                        <div class="col-xs-3">
+                                            <div ng-init="item.isRequired = (item.isRequired.toString() == 'true' ? true : false)" ng-model="item.isRequired" ng-click="item.isRequired = !item.isRequired" ios-switch></div>
+                                        </div>
+                                        <div class="col-xs-1"></div>
+                                        <div class="col-xs-1"></div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-xs-1"></div>
+                                        <div class="col-xs-4 control-label text-left">Libellé colonne :</div>
+                                        <div class="col-xs-4">
+                                            <input type="text" class="form-control" ng-model="item.tempJsonName" placeholder="{{item.tempName}}" />
+                                        </div>
+                                        <div class="col-xs-1">
+                                            <button type="button" ng-if="(item.tempType != '1' && item.tempType != '7' && item.tempType != '8' && item.tempType != '2')" ng-click="validateEditForm(item)" class="btn btn-success">Valider</button>
+                                        </div>
+                                        <div class="col-xs-1"></div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group"  ng-if="(item.tempType == '1' || item.tempType == '7' || item.tempType == '8' || item.tempType == '2')">
+                                    <div class="row">
+                                        <div class="col-xs-1"></div>
+                                        <div class="col-xs-4 control-label text-left">Valeur :</div>
+                                        <div class="col-xs-4">
+                                            <div class="input-group">
+                                                <input id="input_{{item.id}}" type="text" class="form-control" ng-focus="inputSelected()" ng-model="item.tempDefaultValue">
+                                                <div class="input-group-btn">
+                                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></button>
+                                                    <ul class="dropdown-menu dropdown-menu-right">
+                                                    <li ng-repeat="option in tagOptions"><a href="" ng-click="insertText(option.name, item)">{{option.name}}</a></li>
+                                                    </ul>
+                                                </div><!-- /btn-group -->
+                                            </div><!-- /input-group -->
+                                        </div>
+                                        <div class="col-xs-1">
+                                            <button type="button" ng-click="validateEditForm(item)" class="btn btn-success">Valider</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <br />
+    <strong>Paramètrage</strong>
+    <div class="clearfix"></div>
+    <br/>
+
+    <div class="container col-xs-12">
+        <form class="form-horizontal" role="form">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-10">Limiter à une participation par destinataire</div>
+                    <div class="col-md-2">
+                        <div style="padding-left: 18px;" ng-init="limitSwitch = (limitSwitch.toString() == 'true' ? true : false)" ng-click="limitSwitch =!limitSwitch" ng-model="limitSwitch" ios-switch></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row hide" ng-show="limitSwitch.toString() == 'true'">
+                    <div class="col-md-8">Champs permettant de savoir si une personne a déjà participé</div>
+                    <div class="col-md-4" style="margin-top: -6px;">
+                        <div style="padding-left: 40px;">
+                            <multiselect ng-model="uniqueField" options="formFields"></multiselect>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group" ng-show="limitSwitch.toString() == 'true'">
+                <div class="row">
+                    <div class="col-md-8">Phrase informant que la personne a déjà participé</div>
+                </div>
+            </div>
+
+            <div class="form-group" ng-show="limitSwitch.toString() == 'true'">
+                <div class="row">
+                    <div class="col-md-12">
+                        <textarea ng-show="limitSwitch.toString() == 'true'" class="form-control" ng-model="participatedText" placeholder="Vous avez déjà répondu à cette enquête. 
+Merci pour votre participation." style="height: 75px !important;"></textarea>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="clearfix"></div>
+    <br />
+
+    <strong>Page de remerciements</strong>
+
+    <textarea class="form-control thankNoteSummernote" name="thank-note" ng-bind-html="thankNote | unsafe"></textarea>
+
+    <br />
+
+    <strong>Texte champs obligatoire</strong>
+
+    <textarea class="form-control mandatoryErrorMessageSummernote" name="mandatory-error-message" ng-bind-html="mandatoryErrorMessage | unsafe"></textarea>
+</div>

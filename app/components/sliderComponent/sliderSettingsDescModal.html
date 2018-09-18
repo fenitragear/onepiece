@@ -1,0 +1,100 @@
+<div class="modal-header">
+    <h3 class="modal-title">Paramètres de l'image
+        <button type="button" class="close closemodal" ng-click="cancel()"aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </h3>
+   
+</div>
+
+<div class="modal-body">
+    <div class="col-xs-12">
+        <div style="float:left" class="col-xs-4">
+            <div class="folder_open" > 
+                <div class="slider_img " style="width:100%;">
+                    <div class="link_banner" ng-class= "{link_banner_red: (image.formLink === 'true' || image.formLink === true)}" ng-hide="!image.link.length > 0"></div> 
+                    <div class="image_handler m-b-md image_edit_container" style="background-image : url('{{image.src}}')">
+                        <div class="image_remove_handler image_edited" ng-if="!show">
+                            <span ng-click="uploadfile()"><p>Remplacer</p></span>
+                            <input type="file" id="imageUp" style="display:none">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="float:right" ng-if="!show && image.cropped!=''">
+                <button class="btn btn-primary btn-xs"  ng-click="openCrop(image)">
+                    <span class="glyphicon glyphicon-pencil"></span> Editer 
+                </button>
+            </div>
+        </div>
+
+        <div class="col-xs-8">
+            <div class="m-t-md no-padder" style="margin-top:0;">
+                <label class="control-label col-xs-3 image_desc_label">Description</label>
+                <div class="col-xs-9 image_desc_text">
+                    <textarea rows="3" maxlength="45" data-limit-rows="true" class="form-control ng-pristine ng-valid" ng-model="image.text"
+                        style="width:115%;line-height: 2"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="m-t-md no-padder">
+        <label class="control-label col-xs-6">Prix</label>
+        <div class="col-xs-4">
+            <input type="number" class="form-control input-sm input-number–noSpinners " ng-model="image.price">
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="m-t-md no-padder">
+        <label class="control-label col-xs-6">Ancien prix (Facultatif - le prix sera barré si indiqué)</label>
+        <div class="col-xs-4">
+            <input type="number" class="form-control input-sm input-number–noSpinners " ng-model="image.oldPrice" ng-disabled="image.price=='0'">
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="m-t-md no-padder">
+        <label class="control-label col-xs-6">URL</label>
+        <div class="col-xs-6">
+            <input type="text" class="form-control input-sm" ng-model="image.link">
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="m-t-md no-padder">
+        <label class="control-label col-xs-4">Appliquer l'URL à toutes les images du diaporama</label>
+        <div class="col-xs-8">
+            <div ng-model="applyAll" ng-click="applyAll=!applyAll" ios-switch></div>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="m-t-md no-padder">
+        <label class="control-label col-xs-4">Ouvrir dans une nouvelle fenêtre</label>
+        <div class="col-xs-8">
+            <div ng-init="image.blank = (image.blank.toString() == 'true' ? true : false)" ng-click="image.blank=!image.blank" ng-model="image.blank" ios-switch></div>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+</div>
+
+<div class="modal-footer">
+    <!-- <div>
+        <button class="btn btn-primary" ng-click="ok()">Valider</button>
+        <button class="btn btn-warning" ng-click="cancel()">Annuler</button>
+    </div>
+    <br/> -->
+
+    <div style="float:right">
+        <button class="btn btn-xs btn-primary glyphicon glyphicon-chevron-left" ng-click="previousImage()"></button>
+        {{currentImage+1}}/{{imageList.length}}
+        <button class="btn btn-xs btn-primary glyphicon glyphicon-chevron-right" ng-click="nextImage()"></button>
+    </div>
+</div>

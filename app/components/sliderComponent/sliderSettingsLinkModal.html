@@ -1,0 +1,38 @@
+
+<div class="modal-header"><h3 class="modal-title">Paramètres du lien sur l'image du diaporama</h3></div>
+
+<div class="modal-body">
+    <div class="m-t-md no-padder">
+        <label class="control-label col-xs-4">Titre</label>
+        <div class="col-xs-8"><input type="text" class="form-control input-sm" ng-model="alt"></div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="m-t-md no-padder">
+        <label class="control-label col-xs-4">URL du lien</label>
+        <div class="col-xs-8"><input type="text" class="form-control input-sm" ng-readonly="formLink" ng-model="link"></div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="m-t-md no-padder">
+        <label class="control-label col-xs-4">Ouvrir dans une nouvelle fenêtre</label>
+        <div class="col-xs-8"><div ng-init="blank = (blank.toString() == 'true' ? true : false)" ng-click="blank=!blank" ng-model="blank" ios-switch></div></div>
+    </div>
+
+    <div class="clearfix"></div>
+    
+    <div class="m-t-md no-padder">
+        <label class="control-label col-xs-4">Appliquer l'URL à toutes les images du diaporama</label>
+        <div class="col-xs-8"><div ng-model="applyAll"  ng-click="applyAll=!applyAll" ios-switch ></div></div>
+    </div>
+
+    <div class="clearfix"></div>
+
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()">Valider</button>
+    <button class="btn btn-warning" ng-click="cancel()">Annuler</button>
+</div>

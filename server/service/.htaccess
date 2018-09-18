@@ -1,0 +1,3 @@
+
+#php config
+php_value max_input_vars 3000

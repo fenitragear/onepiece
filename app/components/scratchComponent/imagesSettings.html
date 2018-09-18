@@ -1,0 +1,160 @@
+<div id="sortable-container-slider" ng-controller="ScratchSettingsCtrl">
+	<div class="form-group no-padder m-t-md">
+        <div class="col-xs-4 control-label text-left no-padder">Afficher le scratch</div>
+        <div class="col-xs-2"><div  ng-model="showScratch" ng-click="showScratch = !showScratch" ios-switch></div></div>
+    </div>
+	<div class="clear"></div>
+    <div class="form-group no-padder m-t-md">
+        <div class="col-xs-4 control-label text-left no-padder">Type</div>
+        <div class="col-xs-8">
+            <select id="scratchTypeSelect" class="form-control" ng-model="selectedType" ng-disabled="false">
+                <option value="simple">Simple</option>
+                <!-- <option value="gagnant_perdant">Gagnant / Perdant</option>
+                <option value="dynamique_pourcent">Dynamique (%)</option>
+				<option value="dynamique_nombre">Dynamique (nombre)</option>
+                <option value="personnalise">Personnalisé</option> -->
+            </select>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div class="sortable-row" as-sortable="sortableOptions" ng-model="imageSimpleList" ng-show="selectedType=='simple'">
+        <div class="slider_img scratch" ng-repeat="image in imageSimpleList" >
+            <div class="slider_img2">
+                <div class="link_banner" ng-class= " {link_banner_red : lien }" ng-hide="!inputUrlAtterissage.length > 0"></div>
+
+                <div class="image_handler m-b-md" style="background-image : url('{{image.src}}')" >
+                    <div class="image_remove_handler">
+                        <i ng-if="$index == 0" ng-show="image.src != '../server/service/scratch/black.jpg'" class="btn-hover-handler reinitialiser_simple glyphicon glyphicon-trash" ng-click="delete(image)"></i>
+                        <i ng-if="$index == 1" ng-show="image.src != '../server/service/scratch/black.jpg'" class="btn-hover-handler reinitialiser_simple glyphicon glyphicon-trash" ng-click="delete(image)"></i>
+                    </div>
+                </div>
+                <div>
+                    <file-input id="scratch-src" label="{{image.label}}" on-change="uploadImage($event, $index)" imindex="{{$index}}"></file-input>
+                </div>
+                <div style="text-align: center;">
+                    <a href="" ng-click="restoreDefaultImage(image)" ng-show="image == imageSimpleList[0] && image.src == '../server/service/scratch/black.jpg'" class="btn btn-default btn-sm">Revenir à l'image par défaut</a>
+                    <a style="visibility:hidden" ng-show="image == imageSimpleList[0] && image.src != '../server/service/scratch/black.jpg'" class="btn btn-default btn-sm">Revenir à l'image par défaut</a>
+                    <a style="visibility:hidden" ng-show="image != imageSimpleList[0]" class="btn btn-default btn-sm">Revenir à l'image par défaut</a>
+                </div>
+                
+                <progressbar class="text-center" value="image.progress" max="100" ng-show="image.progress > 0 && image.progress < 100"></progressbar>
+            </div>
+            
+        </div>
+    </div>
+	<div class="sortable-row" as-sortable="sortableOptions" ng-model="imageGagnantPerdantList" ng-show="selectedType=='gagnant_perdant'">
+		<div class="slider_img scratch" ng-repeat="image in imageGagnantPerdantList" >
+            <div class="slider_img2">
+				<div class="link_banner" ng-class= " {link_banner_red : lien }" ng-hide="!inputUrlAtterissage.length > 0"></div>
+
+				<div class="image_handler m-b-md" style="background-image : url('{{image.src}}')" title="{{image.title}}">
+					<div class="image_remove_handler">
+						<i ng-if="$index != 1" ng-show="image.src != '../server/service/scratch/black.jpg'" class="btn-hover-handler reinitialiser_centre glyphicon glyphicon-trash" ng-click="delete(image)"></i>
+						<i ng-if="$index == 1" ng-show="image.src != '../server/service/scratch/black.jpg'" class="btn-hover-handler reinitialiser glyphicon glyphicon-trash" ng-click="delete(image)"></i>
+						<i ng-if="$index == 1" class="btn-hover-handler glyphicon glyphicon-cog" ng-click="openLink(image)"></i>
+					</div>
+				</div>
+				<div>
+					<file-input id="scratch-src{{$index}}" label="{{image.label}}" on-change="uploadImage($event, $index)" imindex="{{$index}}"></file-input>
+				</div>
+				<div style="text-align: center;">
+					<a href="" ng-click="restoreDefaultImage(image)" ng-show="image == imageGagnantPerdantList[0] && image.src == '../server/service/scratch/black.jpg'" class="btn btn-default btn-sm">Revenir à l'image par défaut</a>
+					<a style="visibility:hidden" ng-show="image == imageGagnantPerdantList[0] && image.src != '../server/service/scratch/black.jpg'" class="btn btn-default btn-sm">Revenir à l'image par défaut</a>
+					<a style="visibility:hidden" ng-show="image != imageGagnantPerdantList[0]" class="btn btn-default btn-sm">Revenir à l'image par défaut</a>
+				</div>
+				<progressbar class="text-center" value="image.progress" max="100" ng-show="image.progress > 0 && image.progress < 100"></progressbar>
+            </div>
+        </div>
+	</div>
+	<div class="sortable-row" as-sortable="sortableOptions" ng-model="imageDynamiquePourcentList" ng-show="selectedType=='dynamique_pourcent'">
+		<div class="form-group no-padder m-t-md">
+			<div class="col-xs-4 control-label text-left no-padder">Nombre d'images après grattage</div>
+			<div class="col-xs-2"><input type="number" min="2" class="form-control" ng-model="$parent.imageDynamiquePourcentNumber"></div>
+		</div>	
+        <div class="clear"></div>	
+		<div class="slider_img scratch" ng-repeat="image in imageDynamiquePourcentList" >
+			<div class="slider_img2">
+				<div class="link_banner" ng-class= " {link_banner_red : lien }" ng-hide="!inputUrlAtterissage.length > 0"></div>
+
+				<div class="image_handler m-b-md" style="background-image : url('{{image.src}}')" title="{{image.title}}">
+					 <div class="image_remove_handler">
+						<i ng-if="$index == 0" ng-show="image.src != '../server/service/scratch/black.jpg'" class="btn-hover-handler reinitialiser_centre glyphicon glyphicon-trash" ng-click="delete(image)"></i>
+						<i ng-if="$index > 0" ng-show="image.src != '../server/service/scratch/black.jpg'" class="btn-hover-handler reinitialiser glyphicon glyphicon-trash" ng-click="delete(image)"></i>
+						<span class="btn-hover-handler glyphicon glyphicon-cog " ng-click="openLink(image)" ng-if="$index > 0"></span>
+					</div> 
+				</div>
+				<div>
+					<file-input id="scratch-src{{$index}}" label="{{image.label}}" on-change="uploadImage($event, $index)" imindex="{{$index}}"></file-input>
+				</div>
+				<div style="text-align: center;">
+					<a href="" ng-click="restoreDefaultImage(image)" ng-show="image == imageDynamiquePourcentList[0] && image.src == '../server/service/scratch/black.jpg'" class="btn btn-default btn-sm">Revenir à l'image par défaut</a>
+					<a style="visibility:hidden" ng-show="image == imageDynamiquePourcentList[0] && image.src != '../server/service/scratch/black.jpg'" class="btn btn-default btn-sm">Revenir à l'image par défaut</a>
+					<a style="visibility:hidden" ng-show="image != imageDynamiquePourcentList[0]" class="btn btn-default btn-sm">Revenir à l'image par défaut</a>
+				</div>
+				<progressbar class="text-center" value="image.progress" max="100" ng-show="image.progress > 0 && image.progress < 100"></progressbar>
+			</div>
+        </div>	
+	</div>
+	<div class="sortable-row" as-sortable="sortableOptions" ng-model="imageDynamiqueNombreList" ng-show="selectedType=='dynamique_nombre'">
+		<div class="form-group no-padder m-t-md">
+			<div class="col-xs-4 control-label text-left no-padder">Nombre d'images après grattage</div>
+			<div class="col-xs-2"><input type="number" min="2" class="form-control" ng-model="$parent.imageDynamiqueNombreNumber"></div>
+		</div>	
+        <div class="clear"></div>	
+		<div class="slider_img scratch" ng-repeat="image in imageDynamiqueNombreList" >
+			<div class="slider_img2">
+				<div class="link_banner" ng-class= " {link_banner_red : lien }" ng-hide="!inputUrlAtterissage.length > 0"></div>
+
+				<div class="image_handler m-b-md" style="background-image : url('{{image.src}}')" title="{{image.title}}">
+					 <div class="image_remove_handler">
+						<i ng-if="$index == 0" ng-show="image.src != '../server/service/scratch/black.jpg'" class="btn-hover-handler reinitialiser_centre glyphicon glyphicon-trash" ng-click="delete(image)"></i>
+						<i ng-if="$index > 0" ng-show="image.src != '../server/service/scratch/black.jpg'" class="btn-hover-handler reinitialiser glyphicon glyphicon-trash" ng-click="delete(image)"></i>
+						<span class="btn-hover-handler glyphicon glyphicon-cog " ng-click="openLink(image)" ng-if="$index > 0"></span>
+					</div> 
+				</div>
+				<div>
+					<file-input id="scratch-src{{$index}}" label="{{image.label}}" on-change="uploadImage($event, $index)" imindex="{{$index}}"></file-input>
+				</div>
+				<div style="text-align: center;">
+					<a href="" ng-click="restoreDefaultImage(image)" ng-show="image == imageDynamiqueNombreList[0] && image.src == '../server/service/scratch/black.jpg'" class="btn btn-default btn-sm">Revenir à l'image par défaut</a>
+					<a style="visibility:hidden" ng-show="image == imageDynamiqueNombreList[0] && image.src != '../server/service/scratch/black.jpg'" class="btn btn-default btn-sm">Revenir à l'image par défaut</a>
+					<a style="visibility:hidden" ng-show="image != imageDynamiqueNombreList[0]" class="btn btn-default btn-sm">Revenir à l'image par défaut</a>
+				</div>
+				<progressbar class="text-center" value="image.progress" max="100" ng-show="image.progress > 0 && image.progress < 100"></progressbar>
+			</div>
+        </div>	
+	</div>	
+	<div class="sortable-row" as-sortable="sortableOptions" ng-model="imagePersonnaliseList" ng-show="selectedType=='personnalise'">
+		<div class="form-group no-padder m-t-md">
+			<div class="col-xs-4 control-label text-left no-padder">Nombre d'images après grattage</div>
+			<div class="col-xs-2"><input type="number" min="2" class="form-control" ng-model="$parent.imagePersonnaliseNumber"></div>
+		
+		</div>
+		<div class="clear"></div>
+		<div class="slider_img scratch" ng-repeat="image in imagePersonnaliseList" >
+			<div class="slider_img2">
+				<div class="link_banner" ng-class= " {link_banner_red : lien }" ng-hide="!inputUrlAtterissage.length > 0"></div>
+
+				<div class="image_handler m-b-md" style="background-image : url('{{image.src}}')" title="{{image.title}}">
+					<div class="image_remove_handler">
+						<i ng-if="$index == 0" ng-show="image.src != '../server/service/scratch/black.jpg'" class="btn-hover-handler reinitialiser_centre glyphicon glyphicon-trash" ng-click="delete(image)"></i>
+						<i ng-if="$index > 0" ng-show="image.src != '../server/service/scratch/black.jpg'" class="btn-hover-handler reinitialiser glyphicon glyphicon-trash" ng-click="delete(image)"></i>
+						<span class="btn-hover-handler glyphicon glyphicon-cog " ng-show="image.src != '../server/service/scratch/black.jpg'" ng-click="openLink(image)" ng-if="$index > 0"></span>
+					</div> 
+				</div>
+				<div>
+					<file-input id="scratch-src{{$index}}" label="{{image.label}}" on-change="uploadImage($event, $index)" imindex="{{$index}}"></file-input>
+				</div>
+				<div style="text-align: center;">
+					<a href="" ng-click="restoreDefaultImage(image)" ng-show="image == imagePersonnaliseList[0] && image.src == '../server/service/scratch/black.jpg'" class="btn btn-default btn-sm">Revenir à l'image par défaut</a>
+					<a style="visibility:hidden" ng-show="image == imagePersonnaliseList[0] && image.src != '../server/service/scratch/black.jpg'" class="btn btn-default btn-sm">Revenir à l'image par défaut</a>
+					<a style="visibility:hidden" ng-show="image != imagePersonnaliseList[0]" class="btn btn-default btn-sm">Revenir à l'image par défaut</a>
+				</div>
+				<progressbar class="text-center" value="image.progress" max="100" ng-show="image.progress > 0 && image.progress < 100"></progressbar>
+			</div>
+        </div>	
+	</div>
+</div>
+
+<div class="clear"></div>
+

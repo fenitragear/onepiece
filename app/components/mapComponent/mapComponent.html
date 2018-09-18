@@ -1,0 +1,61 @@
+
+<div ng-if="map.refresh">
+    <div ng-show="isMapMode">
+        <div class="col-xs-12 map-panel-header text-left">
+            <button ng-click="closeStoresMap()" class="bar-btn btn pull-left"  ng-style="{'background' : colorsecondary, 'color' : colorprimary}"><i class="glyphicon glyphicon-chevron-left"></i></button>
+
+            <div class="selected-map-title" ng-style="{'color' : colorsecondary}">
+                {{selectedMapStore.name}}<br />
+                {{selectedMapStore.address}}
+            </div>
+
+            <a ng-href="{{ 'tel:' + selectedMapStore.phone }}" class="bar-btn btn  pull-right" ng-show="storeSelected" ng-style="{'background' : colorsecondary, 'color' : colorprimary}">
+                <i class="glyphicon glyphicon-earphone"></i>
+            </a>
+        </div>
+
+        <div class="col-xs-12 no-padder">
+            <ui-gmap-google-map center='map.center' zoom='map.zoom' refresh="map.refresh" control="map.control" events="map.events" pan="true">
+                <ui-gmap-markers models="markerList" coords="'self'" click="'onMarkerClicked'"></ui-gmap-markers>
+            </ui-gmap-google-map>
+        </div>
+    </div>
+
+    <div ng-show="isListMode">
+        <div class="col-xs-12 map-panel-header text-left" ng-style="{'background' : colorprimary, 'color' : colorsecondary}">
+            <button ng-click="closeStoresMap()" class="bar-btn btn   pull-left"  ng-style="{'background' : colorsecondary, 'color' : colorprimary}"><i class="glyphicon glyphicon-chevron-left"></i></button>
+        </div>
+
+        <div class="col-xs-12 list-mode no-padder nonbounce" ng-style="{'background' : colorprimary, 'color' : colorsecondary}">
+            <div class="go-to-all-adress">
+                <div class="row" ng-repeat="store in storeList">
+                    <div class="col-xs-8">
+                        <span class="bold">{{store.name}}</span><span class="go-italic" ng-show="store.distance > 0"> à {{store.distanceText}}</span>
+                        <p>{{store.address}}</p>
+                    </div>
+                    <div class="col-xs-4 no-padder go-action-btn">
+                        <a href="javascript:void(0)" ng-click="openMapsRoute(store.lat, store.lng)" class="btn pull-right btn-road" ng-style="{'background' : colorsecondary, 'color' : colorprimary}">
+                            <span class="glyphicon glyphicon-road"></span>
+                        </a>
+                        <a href="{{ 'tel:' + store.phone }}"class="btn   pull-right"  ng-style="{'background' : colorsecondary, 'color' : colorprimary}">
+                            <span class="glyphicon glyphicon-earphone"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="go-to-all-footer">
+        <div class="col-xs-6">
+            <button type="button" class="btn js-go-to-all-map" ng-style="{'background' : mapbg, 'color' : mapcolor}" ng-click="setMapMode()">
+                <span class="glyphicon glyphicon-globe"></span>CARTE
+            </button>
+        </div>
+        <div class="col-xs-6">
+            <button type="button" class="btn js-go-to-all-list" ng-style="{'background' : listbg, 'color' : listcolor}" ng-click="setListMode()">
+                <span class="glyphicon glyphicon-th-list"></span>LISTE
+            </button>
+        </div>
+    </div>
+</div>

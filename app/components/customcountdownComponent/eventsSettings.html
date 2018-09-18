@@ -1,0 +1,123 @@
+<div class="col-md-12 settings_body" ng-controller="EventSettingsCtrl">
+    <div class="form-group no-padder m-t-md">
+        <div class="col-xs-3 control-label text-left no-padder">Afficher le compte à rebours</div>
+        <div class="col-xs-2"><div ng-init="displayed = (displayed.toString() == 'true' ? true : false)" ng-model="displayed" ng-click="displayed = !displayed" ios-switch></div></div>
+    </div>
+    <div class="clearfix"></div>
+    <br>
+
+    <div class="form-group no-padder">
+        <div class="col-xs-3 control-label text-left no-padder">
+            Fin de compte à rebours
+        </div>
+        <div class="col-xs-9">
+            <div class="form-group">
+                <div class='input-group date'>
+                    <input type='text' id="eventctpicker" class="form-control ctpicker" expirationDisplayed="expirationDisplayed" value="{{endDate}}" ng-model="endDate" ng-click="changedate()" placeholder="Date expiration offre" />
+                    <span class="input-group-addon" ng-click="datepickerIconClick()">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <br>
+    
+    <div class="form-group no-padder m-t-md">
+        <div class="col-xs-3 control-label text-left no-padder">Texte d'introdution (sujet du calendrier)</div>
+        <div class="col-xs-2"><div ng-init="eventDisplayed = (eventDisplayed.toString() == 'true' ? true : false)" ng-model="eventDisplayed" ng-click="eventDisplayed = !eventDisplayed" ios-switch></div></div>
+    </div>
+    <div class="clearfix"></div>
+    <br>
+    <div class="form-group no-padder" ng-show="eventDisplayed">
+        <div class="col-xs-12">
+            <textarea class="summernote_form_introduction" name="eventwyg" ng-bind-html="evenement | unsafe"></textarea>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <br>
+    
+    <div class="form-group no-padder m-t-md">
+        <div class="col-xs-3 control-label text-left no-padder">Afficher la date</div>
+        <div class="col-xs-2"><div ng-init="endDateDisplayed = (endDateDisplayed.toString() == 'true' ? true : false)" ng-model="endDateDisplayed"  ng-click="endDateDisplayed = !endDateDisplayed" ios-switch></div></div>
+        <!--<div class="col-xs-2"><input type="checkbox" ng-init="endDateDisplayed = (endDateDisplayed.toString() == 'true' ? true : false)" ng-model="endDateDisplayed" ng-click="endDateDisplayed = !endDateDisplayed" /></div>-->
+    </div>
+    <div class="clearfix"></div>
+    <br><br>
+    <div class="form-group no-padder m-t-md">
+        <div class="col-xs-3 control-label text-left no-padder"><strong>Bouton "Ajouter au calendrier"</strong></div>
+        <div class="col-xs-2"><div ng-init="agendaBtnDisplayed = (agendaBtnDisplayed.toString() == 'true' ? true : false)" ng-model="agendaBtnDisplayed"  ng-click="agendaBtnDisplayed = !agendaBtnDisplayed" ios-switch></div></div>
+        <div class="clearfix"></div>
+    </div>
+    <!--<div><label>Infos ajout au calendrier</label></div>-->
+    <div ng-show="agendaBtnDisplayed">
+        <div class="form-group no-padder m-t-md">
+            <div class="col-xs-3 control-label text-left no-padder">Titre de l'événement</div>
+            <div class="col-xs-9">
+                <input type="text" class="form-control" ng-model="title">
+            </div>
+        </div>
+        <div class="clearfix"></div><br>
+        <div class="form-group no-padder m-t-md">
+            <div class="col-xs-3 control-label text-left no-padder">Lieu de l'événement</div>
+            <div class="col-xs-9">
+                <input type="text" class="form-control" ng-model="place">
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <br>
+        <div class="form-group no-padder">
+            <div class="col-xs-3 control-label text-left no-padder">Description de l'événement</div>
+            <div class="col-xs-9">
+                <textarea rows="3" data-limit-rows="true" class="form-control ng-pristine ng-valid" ng-model="description"></textarea>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <br>
+        <div class="form-group no-padder">
+            <div class="col-xs-3 control-label text-left no-padder">Alerte</div>
+            <div  class="col-xs-3">
+                <input type="number" class="form-control input-sm input-number–noSpinners" ng-model="valueALert">
+            </div>
+            <div class="col-xs-6">
+                <select class="form-control" ng-model="unitALert">
+                    <option ng-selected="{{item.value == unitALert}}" value="{{item.value}}" ng-repeat="item in alerteUnits ">{{item.name}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <br><br>
+    </div>
+    <div class="form-group no-padder">
+        <form class="form-horizontal" role="form">
+            <div class="form-group">
+                <div class="col-xs-3  text-left"><label>Police</label></div>
+                <div class="col-xs-9">
+                    <select class="form-control ct-font-combo" ng-model="ctFonts" ng-style="{'font-family': ctFonts}">
+                        <option ng-selected="{{fontName == ctFonts}}" ng-style="{'font-family': fontName}" value="{{fontName}}" ng-repeat="fontName in fontNames ">{{fontName}}</option>
+                    </select>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="clearfix"></div>
+    <br>
+    <div class="form-group no-padder">
+        <div class="col-xs-3 control-label text-left m-t-md no-padder">
+            <label>Message de fin</label>
+        </div>
+        <div class="col-xs-9">
+            <textarea class="form-control" rows="2" ng-model="txtEndMessage"></textarea>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <br>
+    <div class="form-group no-padder m-t-md">
+        <div class="col-xs-3 control-label text-left no-padder">Voir l'aperçu du message de fin</div>
+        <!--<div class="col-xs-9"><input type="checkbox" ng-init="expirationDisplayed = (expirationDisplayed.toString() == 'true' ? true : false)" ng-model="expirationDisplayed" ng-click="expirationDisplayed = !expirationDisplayed"  /></div>-->
+        <div class="col-xs-2"><div ng-init="expirationDisplayed = (expirationDisplayed.toString() == 'true' ? true : false)" ng-model="expirationDisplayed"  ng-click="expirationDisplayed = !expirationDisplayed" ios-switch></div></div>
+    </div>
+    <div class="clearfix"></div>
+    <br>
+</div>

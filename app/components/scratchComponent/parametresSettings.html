@@ -1,0 +1,45 @@
+<div ng-controller="ScratchSettingsCtrl">
+    <form>
+        <div class="form-group">
+            <label for="inputUrlAtterissage" class="control-label">URL d'atterrissage après grattage</label>
+            <input type="text" class="form-control" ng-disabled="lien" ng-model="inputUrlAtterissage" placeholder="http://">
+        </div>
+		
+		<div class="clear"></div>
+
+		<div class="form-group">
+			<div class="col-xs-5 control-label text-left no-padder"><label style="padding-left: 0px;" for="lien" class="control-label">Ouverture automatique de l'URL</label></div>
+			<div class="col-xs-2"><div ng-init="ouvrir = (ouvrir.toString() == 'true' ? true : false)" ng-model="ouvrir" ng-click="ouvrir = !ouvrir" ios-switch></div></div>
+		</div>
+
+		<div class="clear"></div>
+
+		<div class="form-group">
+			<div class="col-xs-5 control-label text-left no-padder"><label style="padding-left: 0px;" for="lien" class="control-label">Lien vers formulaire</label></div>
+			<div class="col-xs-2"><div ng-init="lien = (lien.toString() == 'true' ? true : false)" ng-model="lien" ng-click="lien = !lien" ios-switch></div></div>
+		</div>		
+
+        <br>
+
+        <label ng-show="ouvrir" for="inputDuree" class="control-label">Durée d'affichage avant redirection vers l’URL d’atterrissage</label>
+        <div ng-show="ouvrir" class="input-group">
+            <input type="number" min="1" class="form-control" ng-model="inputDuree" placeholder="0">
+            <span class="input-group-addon">seconde(s)</span>
+        </div>
+		
+		<br ng-show="ouvrir">
+
+        <label for="inputPourcentage" class="control-label">Pourcentage de grattage pour considérer que l'image a été grattée</label>
+        <div class="input-group">
+            <input type="number" min="1" max="100" class="form-control" ng-model="inputPourcentage" placeholder="80">
+            <span class="input-group-addon">%</span>
+        </div>
+
+        <br>
+
+        <div class="form-group">
+            <div class="col-xs-4 control-label" style="padding-left:0px!important;"><b>Epaisseur du pinceau</b></div>
+            <div class="col-xs-8"><input class="sizeSlider" id="ex2" data-slider-id='ex2Slider' type="text" /></div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,235 @@
+<div class="col-md-12  settings_body" ng-controller="AdvancedEventSettingsCtrl">
+    <div><label>Couleurs</label></div>
+    <div class="form-group no-padder">
+        <div class="col-xs-4 control-label text-left m-t-md no-padder">
+            Couleur de fond
+        </div>
+        <div class="col-xs-8">
+            <div id="evtcolor_primary" class="colorpicker color_primary"  ng-style="{'background-color' : EventBgColor}"></div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <br>
+    <div class="form-group no-padder">
+        <div class="col-xs-4 control-label text-left m-t-md no-padder">
+            Couleur de fond du compteur
+        </div>
+        <div class="col-xs-8">
+            <div id="color_primary" class="colorpicker ct-bgcolor-picker"  ng-style="{'background-color' : ctBgColor}"></div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <br>
+    <div class="form-group no-padder">
+        <div class="col-xs-4 control-label text-left m-t-md no-padder">
+            Couleur des Chiffres
+        </div>
+        <div class="col-xs-8">
+            <div id="number_color" class="colorpicker number_color_primary"  ng-style="{'background-color' : ctFontColor}"></div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <br>
+    <div class="form-group no-padder">
+        <div class="col-xs-4 control-label text-left m-t-md no-padder">
+            Couleur des libellés & date
+        </div>
+        <div class="col-xs-8">
+            <div id="text_color_primary" class="colorpicker text_color_primary"  ng-style="{'background-color' : ctLblFontColor}"></div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <br>
+    <div class="form-group no-padder">
+        <div class="col-xs-4 control-label text-left m-t-md no-padder">
+            Couleur du message de fin
+        </div>
+        <div class="col-xs-8">
+            <div id="exp_color_primary" class="colorpicker exp_color_primary"  ng-style="{'background-color' : ctExpFontColor}"></div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <br><br>
+
+    <div><label>Taille</label></div>
+    <div class="form-group no-padder">
+        <div class="col-xs-5 control-label text-left m-t-md no-padder">
+            Taille des chiffres
+        </div>
+        <div class="col-xs-4">
+            <input class="countdownNumberSizeSlider" style="width: 134px;"  type="text" />
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <br>
+    <div class="col-xs-5 control-label text-left m-t-md no-padder">
+        Taille des arrondis du compteur
+    </div>
+    <div class="col-xs-4">
+        <input class="countdownCounterBradiusSlider" style="width: 134px;"  type="text" />
+    </div>
+    <div class="clearfix"></div>
+    <br>
+    <div class="form-group no-padder">
+        <div class="col-xs-5 control-label text-left m-t-md no-padder">
+            Taille des libellés
+        </div>
+        <div class="col-xs-4">
+            <input class="countdownTextSizeSlider" style="width: 134px;"  type="text" />
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <br>
+    <div class="form-group no-padder">
+        <div class="col-xs-5 control-label text-left m-t-md no-padder">
+            Taille de la date
+        </div>
+        <div class="col-xs-4">
+            <input class="countdownEndDateTextSizeSlider" style="width: 134px;"  type="text" />
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <br>
+    <div class="form-group no-padder">
+        <div class="col-xs-5 control-label text-left m-t-md no-padder">
+            Taille du message de fin
+        </div>
+        <div class="col-xs-4">
+            <input class="countdownEndTextSizeSlider" style="width: 134px;"  type="text" />
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <br><br>
+
+    <div ng-show="advancedAgendaBtnDisplayed">
+        <div class="form-group no-padder m-t-md">
+            <div class="col-xs-12 control-label text-left no-padder"><strong>Bouton "Ajouter au calendrier"</strong></div>
+        </div>
+        <div class="clearfix"></div>
+        <br>
+        <div class="col-xs-3 control-label text-left m-t-md no-padder">
+            Couleur du bouton
+        </div>
+        <div class="col-xs-9">
+            <div id="ct-agendabgcolor-btn" class="colorpicker ct-agendabgcolor-picker"  ng-style="{'background-color' : ctAgendaBgColor}"></div>
+        </div>
+
+        <div class="clearfix"></div>
+        <br>
+        <div class="form-group no-padder">
+            <div class="col-xs-3 control-label text-left m-t-md no-padder">
+                Couleur du texte
+            </div>
+            <div class="col-xs-9">
+                <div id="ct-agendacolor-txt" class="colorpicker ct-agendacolor-picker"  ng-style="{'background-color' : ctAgendaFontColor}"></div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <br>
+        <div class="form-group no-padder">
+            <div class="col-xs-5 control-label text-left m-t-md no-padder">
+                Taille du texte
+            </div>
+            <div class="col-xs-4">
+                <input class="countdownAgendaBtnTextSizeSlider" style="width: 134px;"  type="text" />
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <br>
+        <div class="form-group no-padder">
+            <div class="col-xs-5 control-label text-left m-t-md no-padder">
+                Taille des arrondis
+            </div>
+            <div class="col-xs-4">
+                <input class="countdownAgendaBorderSlider" style="width: 134px;"  type="text" />
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+        <br>
+
+        <!-- <div class="form-group no-padder">
+            <div class="col-xs-5 control-label text-left no-padder">
+                Espacement entre les chiffres
+            </div>
+            <div class="col-xs-4">
+                <input class="spaceSizeSlider" style="width: 230px;" type="text" />
+            </div>
+            <div class="col-xs-2"></div>
+        </div>   
+        <div class="clearfix"></div> -->
+    </div>
+    
+    <div class="clearfix"></div>
+    <br><br>
+    <div class="form-group no-padder">
+        <!--<div class="col-xs-3 control-label text-left m-t-md no-padder"><label></label></div>-->
+        <div class="col-xs-5 control-label text-left no-padder"><strong>Libellés</strong></div>
+        <div class="col-xs-4"><div ng-init="lblDisplayed = (lblDisplayed.toString() == 'true' ? true : false)" ng-model="lblDisplayed"  ng-click="lblDisplayed = !lblDisplayed" ios-switch></div></div>
+        <div class="clearfix"></div>
+        <br>
+        <div ng-show="lblDisplayed">
+            <div class="col-xs-5 control-label text-left m-t-md no-padder">
+                Jours
+            </div>
+            <div class="col-xs-7">
+                <input type="text" class="form-control" ng-model="txtday">
+            </div>
+            <div class="clearfix"></div>
+            <br>
+            <div class="col-xs-5 control-label text-left m-t-md no-padder">
+                Heures
+            </div>
+            <div class="col-xs-7">
+                <input type="text" class="form-control" ng-model="txthour">
+            </div>
+            <div class="clearfix"></div><br>
+            <div class="col-xs-5 control-label text-left m-t-md no-padder">
+                Minutes
+            </div>
+            <div class="col-xs-7">
+                <input type="text" class="form-control" ng-model="txtminute">
+            </div>
+            <div class="clearfix"></div><br>
+            <div class="col-xs-5 control-label text-left m-t-md no-padder">
+                Secondes
+            </div>
+            <div class="col-xs-7">
+                <input type="text" class="form-control" ng-model="txtsecond">
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+        <br>
+        <div ng-show="agendaBtnDisplayed">
+            <div class="col-xs-5 control-label text-left m-t-md no-padder">
+                Ajout au calendrier
+            </div>
+            <div class="col-xs-7">
+                <input type="text" class="form-control" ng-model="txtAgendaBtn">
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <br>
+    <div class="col-xs-12 control-label text-left no-padder"><strong>URL</strong></div>
+    <div class="clearfix"></div>
+    <div class="form-group no-padder">
+        <div class="col-xs-5 control-label text-left m-t-md no-padder">
+            URL sur le compteur
+        </div>
+        <div class="col-xs-7">
+            <input type="text" class="form-control" placeholder="http://" ng-model="txtCtUrl">
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <br>
+    <div class="form-group no-padder">
+        <div class="col-xs-5 control-label text-left no-padder">Ouvrir dans une nouvelle fenêtre</div>
+        <!--<div class="col-xs-2"><input type="checkbox" ng-init="newWindowUrl = (newWindowUrl.toString() == 'true' ? true : false)" ng-model="newWindowUrl" ng-click="newWindowUrl = !newWindowUrl" /></div>-->
+        <div class="col-xs-4"><div ng-init="newWindowUrl = (newWindowUrl.toString() == 'true' ? true : false)" ng-model="newWindowUrl"  ng-click="newWindowUrl = !newWindowUrl" ios-switch></div></div>
+    </div>
+    <div class="clearfix"></div>
+    <br>
+</div>

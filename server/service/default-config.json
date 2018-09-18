@@ -1,0 +1,6 @@
+{
+    "formDataSubmitUrl":"http://localhost/netMessage/server/files/1",
+    "hasPhp": true,
+    "phpFormURL": "http://form.smsresponsive.com",
+    "tagUrl":"https://sclients.netmessage.com/apiNm/getListRecipientDatabaseOpe.php?opeKey=[OPEKEY]&nList=1&nRec=[NREC]"
+}

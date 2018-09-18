@@ -1,0 +1,33 @@
+<div id="sortable-container-slider" ng-controller="ShakeSettingsCtrl">
+	<div class="form-group no-padder m-t-md">
+        <div class="col-xs-4 control-label text-left no-padder">Afficher le sms à secouer</div>
+        <div class="col-xs-2"><div ng-init="showShake = (showShake.toString() == 'true' ? true : false)" ng-model="showShake" ng-click="showShake = !showShake" ios-switch></div></div>
+    </div>
+
+    <div class="clear"></div>
+    <div class="sortable-row" as-sortable="sortableOptions" ng-model="image">
+        <div class="slider_img scratch" ng-repeat="image in shakeImage" >
+            <div class="slider_img2">
+                <div class="image_handler m-b-md" style="background-image : url('{{image.src}}')" >
+                    <div class="image_remove_handler">
+                        <i ng-if="$index == 0" ng-show="image.src != '../server/service/shake/black.jpg'" class="btn-hover-handler reinitialiser_simple glyphicon glyphicon-trash" ng-click="delete($index,image)"></i>
+                        <i ng-if="$index == 1" ng-show="image.src != '../server/service/shake/black.jpg'" class="btn-hover-handler reinitialiser_simple glyphicon glyphicon-trash" ng-click="delete($index,image)"></i>
+                    </div>
+                </div>
+                <div>
+                    <file-input id="scratch-src" label="{{image.label}}" on-change="uploadShakeImage($event, $index)" imindex="{{$index}}"></file-input>
+                </div>
+                <div style="text-align: center;">
+                    <a href="" ng-click="restoreDefaultImage(image)" ng-show="image == shakeImage[0] && image.src == '../server/service/shake/black.jpg'" class="btn btn-default btn-sm">Revenir à l'image par défaut</a>
+                    <a style="visibility:hidden" ng-show="image == shakeImage[0] && image.src != '../server/service/shake/black.jpg'" class="btn btn-default btn-sm">Revenir à l'image par défaut</a>
+                    <a style="visibility:hidden" ng-show="image != shakeImage[0]" class="btn btn-default btn-sm">Revenir à l'image par défaut</a>
+                </div>
+                
+                <progressbar class="text-center" value="image.progress" max="100" ng-show="image.progress > 0 && image.progress < 100"></progressbar>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="clear"></div>
+

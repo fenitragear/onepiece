@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en" ng-app="netMessage" ng-controller="pageCtrl">
+
+<head>
+	<meta charset="utf-8">
+	<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+	<META HTTP-EQUIV="EXPIRES" CONTENT="Mon, 22 Jul 2002 11:12:01 GMT">
+	<title ng-bind="options.title">Voir mon offre</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<link rel="stylesheet" href="css/app.css?version=19">
+	<!--<link rel="stylesheet" href="bootstrap/css/bootstrap.css?version=18" />-->
+	<!--<link rel="stylesheet" href="bootstrap/css/bootstrap3.min.css?version=18" />-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="bootstrap/css/bootstrap-datetimepicker.min.css?version=18">
+	<link rel="stylesheet" href="js/libs/ui-switch.min.css?version=18" />
+	<link rel="stylesheet" href="js/libs/codemirror/codemirror.css?version=18" />
+	<link rel="stylesheet" href="bootstrap/colorpicker/css/colpick.css?version=18" />
+	<link rel="stylesheet" href="bootstrap/multi-select/css/bootstrap-multiselect.css?version=18" />
+	<link rel="stylesheet" href="js/libs/sortable.css?version=18" />
+	<link rel="stylesheet" href="js/libs/slider.css?version=18" />
+	<link rel="stylesheet" href="bootstrap/bootstrap-select.min.css" />
+	<link rel="stylesheet" href="bootstrap/datepicker/bootstrap-datepicker.css" />
+	<link rel="stylesheet" href="bootstrap/bootstrap-select.min.css" />
+	<link rel="stylesheet" href="css/jquery.mobile.flip.min.css" />
+		<link rel="stylesheet" href="css/croppie.css"/>
+		<link rel="stylesheet" href="css/fontawesome.min.css"/>
+	<meta name="viewport" content="width=device-width, user-scalable=no">
+
+</head>
+
+<body data-ng-class="{'overflow-hidden maxHeight' : mapMode}">
+	<netTemplate clientid="clientId" templateid="3" editmode="false"></netTemplate>
+
+	<script src="js/utils.js?version=18"></script>
+
+	<script src="js/libs/jquery-1.11.0.min.js?version=18"></script>
+
+	<script src="js/libs/jquery.mobile.flip.js"></script>
+	<!--<script src="bootstrap/js/bootstrap.min.js?version=18"></script>-->
+	<!--<script src="bootstrap/js/bootstrap3.min.js?version=18"></script>-->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="bootstrap/bootstrap-datetimepicker.min.js?version=18"></script>
+	<script src="bootstrap/moment.js?version=18"></script>
+	<script src="bootstrap/bootstrap-datetimepicker.fr.js?version=18"></script>
+	<script src="bootstrap/wysiwyg/dist/summernote.js?version=18"></script>
+	<script src="bootstrap/wysiwyg/dist/lang-fr-FR.js?version=18"></script>
+	<script src="bootstrap/colorpicker/js/colpick.js?version=18"></script>
+	<!--<script src="js/scratch.min.js"></script>-->
+	<script src="js/wScratchPad.min.js"></script>
+
+	<script src="js/libs/swiper.min.js"></script>
+	<script src="js/angular/angular.min.js?version=18" type="text/javascript"></script>
+	<script src="js/angular/angular-route.min.js?version=18"></script>
+	<script src="js/angular/angular-touch.min.js?version=18"></script>
+	<script src="js/angular/angular-sanitize.min.js?version=18"></script>
+	<script src="js/angular/angular-animate.min.js?version=18"></script>
+	<script src="js/angular/bootstrap-datepicker.js?version=18"></script>
+	<script src="js/angular/ng-clipboard.js?version=18"></script>
+
+	<!--<script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAs3zh1-oNO3jkRqhJusSkZOkNmAkZlpbc'></script>-->
+	<script src='js/libs/googlemaps.js'></script>
+	<script src="bootstrap/lodash.js?version=18"></script>
+	<script src="bootstrap/angular-google-maps.js?version=18"></script>
+	<script src="bootstrap/fileinput/js/fileinput.js?version=18"></script>
+	<script src="bootstrap/bootstrap-ui.min.js?version=18"></script>
+	<script src="js/libs/froogaloop2.min.js"></script>
+	<script src="js/libs/ng-videosharing-embed.min.js?version=20"></script>
+	<script src="bootstrap/datepicker/bootstrap-datepicker.js"></script>
+
+	<script src="js/app.js?version=19"></script>
+	<script src="js/controllers/mainCtrl.js?version=19"></script>
+	<script src="js/controllers/pageCtrl.js?version=18"></script>
+	<script src="js/controllers/settingsCtrl.js?version=18"></script>
+	<script src="js/filters.js?version=18"></script>
+	<script src="js/directive.js?version=18"></script>
+	<script src="js/libs/angular-slider.js?version=18"></script>
+	<script src="js/libs/ui-switch.min.js?version=18"></script>
+	<script src="js/libs/multiselect.js?version=18"></script>
+	<script src="js/libs/timelist.js?version=18"></script>
+	<script src="js/libs/sortable.js?version=18"></script>
+	<script src="js/libs/slider.js?version=18"></script>
+	<script src="js/libs/customselect.js?version=18"></script>
+	<script src="js/libs/shake.js?version=18"></script>
+	<script src="js/ckeditor/ckeditor.js?version=18"></script>
+    <script src="js/libs/JsBarcode.all.js"></script>
+    <script src="js/libs/jquery-barcode.js"></script>
+
+	<!--<script src="https://cdn.jsdelivr.net/npm/angular-swiper@0.4.0/dist/angular-swiper.min.js"></script>-->
+
+	<script src="components/templateComponent/templateComponent.js?version=19"></script>
+	<script src="components/mapComponent/mapComponent.js?version=18"></script>
+
+	<script src="components/logoComponent/logoComponent.js?version=18"></script>
+	<script src="components/logoComponent/logoSettings.js?version=18"></script>
+
+	<script src="components/videoComponent/videoComponent.js?version=19"></script>
+	<script src="components/videoComponent/videoSettings.js?version=19"></script>
+
+	<script src="components/titleComponent/titleComponent.js?version=18"></script>
+	<script src="components/titleComponent/titleSettings.js?version=18"></script>
+
+	<script src="components/customcountdownComponent/customcountdownComponent.js?version=18"></script>
+	<script src="components/customcountdownComponent/customcountdownSettings.js?version=18"></script>
+
+	<script src="components/barcodeComponent/barcodeComponent.js?version=18"></script>
+	<script src="components/barcodeComponent/barcodeSettings.js?version=18"></script>
+
+	<script src="components/sliderComponent/sliderComponent.js?version=18"></script>
+	<script src="components/sliderComponent/sliderSettings.js?version=18"></script>
+
+	<script src="components/scratchComponent/scratchComponent.js?version=18"></script>
+	<script src="components/scratchComponent/scratchSettings.js?version=18"></script>
+
+	<script src="components/shakeComponent/shakeComponent.js?version=18"></script>
+	<script src="components/shakeComponent/shakeSettings.js?version=18"></script>
+
+	<script src="components/textComponent/textComponent.js?version=18"></script>
+	<script src="components/textComponent/textSettings.js?version=18"></script>
+
+	<script src="components/storesComponent/storesSettings.js?version=18"></script>
+	<script src="components/storesComponent/storesComponent.js?version=18"></script>
+
+	<script src="components/cguComponent/cguComponent.js?version=18"></script>
+	<script src="components/cguComponent/cguSettings.js?version=18"></script>
+
+	<script src="components/optionsComponent/optionsSettings.js?version=18"></script>
+
+	<script src="components/formComponent/formComponent.js?version=18"></script>
+	<script src="components/formComponent/formSettings.js?version=18"></script>
+
+	<script src="components/expertModeComponent/expertModeSettings.js?version=18"></script>
+	   <script src="js/libs/croppie.js"></script>
+</body>
+
+</html>

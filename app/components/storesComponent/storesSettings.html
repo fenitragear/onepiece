@@ -1,0 +1,104 @@
+
+<div class="col-xs-12 settings_header panel-heading">
+    <div class="settings_title">
+        <a ng-click="previous()" class="navigation">
+            <i class="glyphicon glyphicon-chevron-left pull-left"></i>
+        </a>
+        <a ng-click="next()" class="navigation">
+            <i class="glyphicon glyphicon-chevron-right pull-right"></i>
+        </a>
+        Géolocalisation / Liste de Points de vente
+    </div>
+</div>
+<br>
+
+<div class="col-md-12 panel-body settings_body" ng-controller="StoresMainSettingsCtrl">
+    <ul class="nav nav-tabs">
+        <li role="presentation" ng-class="{active: (nav.toString() == 'geolocpv')}">
+            <a href="" ng-click="nav='geolocpv'" >Géolocalisation / Liste de Points de vente</a>
+        </li>
+        <li role="presentation" ng-class="{active: (nav.toString() == 'parameters')}">
+            <a href="" ng-click="nav='parameters'">Styles & Paramètres avancés</a>
+        </li>
+    </ul>
+    <br/>
+    <div ng-include src="'components/storesComponent/geolocpvSettings.html'" ng-if="nav=='geolocpv'"></div>
+    <div ng-include src="'components/storesComponent/advancedSettings.html'" ng-if="nav=='parameters'"></div>
+</div>
+
+<!--
+
+<div class="col-xs-12 panel-body settings_body">
+    <div class="form-group no-padder m-t-md">
+        <div class="col-xs-4 control-label text-left no-padder">Afficher ce bloc texte</div>
+        <div class="col-xs-2"><div ng-model="displayed" ng-click="displayed = !displayed" ios-switch></div></div>
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="col-xs-10 col-xs-offset-1" data-ng-class="{'hide' : hasStores }">
+        <input type="file" id="stores-src" class="form-control stores-src" />
+    </div>
+
+    <div class="col-xs-8 col-xs-offset-2 panel-success panel panel-body alert-success text-center m-b-none" data-ng-class="{'hide' : !hasStores }" style="margin-top:10px;padding: 10px">
+        <span class="biggerBold">{{storesData.length}}</span> point{{storesData.length > 1 ? 's' : ''}} de vente importé{{storesData.length > 1 ? 's' : ''}}
+        <button ng-click="delete()" class="btn btn-danger btn-xs pull-right">
+            <i  class="glyphicon glyphicon-trash "></i>
+        </button>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="m-t-md no-padder">
+        <label class="control-label col-xs-1">
+            <i class="glyphicon glyphicon-map-marker m-t-md"></i>
+        </label>
+        <div class="col-xs-11">
+            <div class="input-group">
+                <input type="text" class="form-control input-sm" ng-model="title">
+                <span class="input-group-btn">
+                    <button class="btn btn-sm btn-primary" ng-click="resetTitle()" type="button">Réinitialiser</button>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="m-t-md no-padder">
+        <label class="control-label col-xs-1">
+            <i class="glyphicon glyphicon-globe m-t-md"></i>
+        </label>
+        <div class="col-xs-11">
+            <div class="input-group">
+                <input type="text" class="form-control input-sm" ng-model="allStoreTitle">
+                <span class="input-group-btn">
+                    <button class="btn btn-sm btn-primary" ng-click="resetAllStoreTitle()" type="button">Réinitialiser</button>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <hr class="storeSeparator" />
+
+
+    <div class="clearfix"></div>
+
+    <p><strong>Importez la liste de vos points de vente</strong></p>
+
+    <p>Une fois géolocalisés, vos clients/prospects seront orientés vers le point de vente le + proche.</p>
+
+    <p>
+        Ils auront alors accès à :<br />
+        - L’adresse du point de vente le + proche<br />
+        - Le N° de téléphone<br />
+        - L’itinéraire pour s’y rendre (piétons / voiture / transports)<br />
+        - La liste de tous vos points de vente (coordonnées & carte)<br />
+    </p>
+
+    <p>Votre liste doit contenir les coordonnées GPS de chaque points de vente <u>sans en-t&ecirc;tes</u>. <a href="../server/service/magasin.csv" target="_blank">Voir le fichier modèle (.csv)</a></p>
+
+    <p><img src="img/magasins.png" width="100%" /></p>
+</div>
+-->

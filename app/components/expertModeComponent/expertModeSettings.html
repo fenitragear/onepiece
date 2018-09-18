@@ -1,0 +1,39 @@
+<div class="col-xs-12 settings_header panel-heading">
+    <div class="settings_title">Interface du Mode Expert</div>
+</div>
+<br/>
+
+<div class="col-md-12 panel-body settings_body">
+    <div class="row">
+        <div class="col-xs-12" id="codeMirrorDivSourceCode">
+            <label>Body</label>
+            <textarea id="codeMirrorDiv"></textarea>
+        </div>
+    </div>
+    <br />
+
+    <div class="row">
+        <div class="col-xs-12" id="codeMirrorDivExpertHeader">
+            <label>Header</label>
+            <textarea id="codeMirrorExpertHeader" ng-value="expert_header" ng-model="expert_header" class="form-control"></textarea>
+        </div>
+    </div>
+    <br />
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="pull-left">
+                <button type="button" ng-click="importSourceCode()" id="importBtn" data-loading-text=" importing..." class="btn btn-primary  pull-right btn-sm">
+                    <span class="glyphicon glyphicon-import" aria-hidden="true"> </span> Afficher le code du mode assisté
+                </button>
+            </div>
+
+            <div class="pull-right">
+                <button type="button" ng-click="saveTempSourceCode(this)" id="runBtn" data-loading-text=" Saving..." class="btn btn-default btn-sm">
+                    <span class="glyphicon glyphicon-play" aria-hidden="true"> </span> Afficher les modifications dans le téléphone
+                </button>
+                <button type="button" class="btn btn-primary btn-sm" id="saveCodeBtn" data-loading-text=" En cours..." ng-click="saveSourceCode()">Enregistrer</button>
+            </div>
+        </div>
+    </div>
+</div>

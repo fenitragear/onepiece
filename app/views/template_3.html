@@ -1,0 +1,27 @@
+<div class="template">
+    <div class="template_wrapper col-xs-12 "  >
+        <div style="margin-right: auto; margin-left: auto;">
+         <div class="container ">
+         <div class="row">
+         	<div class="row discount"
+                 ng-hide="!logoData.displayed && titleTextLength == 0"
+                 ng-class="{'no-padder-top' : logoData.size == 100 || !logoData.displayed, 'no-padder-bottom' : titleTextLength == 0 && logoData.size == 100 }"
+                 ng-style="{'background' : colorPrimary, 'color': colorSecondary}"
+				 >
+
+                <netLogo ng-click="changeUrl('logo')" settings="logoData"
+                         ng-class="{active : currentUrl == 'logo', logofloat : logoData.size <= 50, logoblock : logoData.size > 50}"
+                         ng-hide="!logoData.displayed"
+                         class="component" ng-style="{'width' : logoData.size + '%'}" >
+
+                         </netLogo>
+
+            </div>
+			<div class="clearfix"></div>
+			<netForm  ng-show="formData.formShow == 'true'" settings="formData"  class="component "></netForm>
+		</div>
+	</div>
+</div>
+
+</div>
+</div>

@@ -1,0 +1,120 @@
+<div ng-if="geolocCurrentType == 'geo'">
+    <div class="row actions" ng-class="{'hide' : storeSize == 0 && !editMode}" ng-show="storesDisplayed" ng-style="{'background' : titles.bgColor, 'color': titles.txtColor}">
+        <div class="col-xs-12 active_wrapper">
+            <div class="col-xs-10 col-xs-offset-1 ">
+                <div>
+                    <div ng-class="{'hide' : !hasStores}">
+                        <div class="col-xs-12" ng-show="!geolocalized" ng-bind-html="geolocalizationMessage"></div>
+                        <div class="col-xs-12" ng-show="geolocalized">
+                            <div class="adresse-title">
+                                <span class="glyphicon glyphicon-map-marker" ng-if="titles.realTxtStoresTitle.length > 0"></span>
+                                <!--<h2>{{titles.title}}</h2>-->
+                                <h2>{{titles.realTxtStoresTitle}}</h2>
+                            </div>
+                            <div class="adresse" ng-style="{'background' : titles.address.bgColor, 'color': titles.address.txtColor}">
+                                <div class="adresse-shopname" ng-if="geolocCurrentType == 'geo'">{{closestStore.name}}</div>
+                                <div>{{closestStore.address}}</div>
+                                <div ng-if="closestStore.openHour != ''"><span class="glyphicon glyphicon-time iconTime" ng-if="closestStore.openHour.length > 0"></span>{{closestStore.openHour}}</div>
+                            </div>
+                        </div>
+
+                        <!--<div class="col-xs-6" ng-if="storesCallDisplayed" ng-show="geolocalized">-->
+                        <div ng-class="{'col-xs-6' : storesItiDisplayed.toString() == 'true', 'col-xs-12' : storesItiDisplayed.toString() == 'false'}"
+                            ng-if="storesCallDisplayed && closestStore.phone" ng-show="geolocalized">
+                            <a ng-href="{{ 'tel:' + closestStore.phone }}">
+                                <!--<button type="button" class="btn btn-default" ng-style="{'background' : colorprimary, 'color': colorsecondary}">-->
+                                <button type="button" class="btn btn-default" ng-style="{'background' : titles.call.bgColor, 'color': titles.call.txtColor}">
+                                    <span style="text-align:center !important;margin-left: -2px;">
+                                        <span class="glyphicon glyphicon-earphone"></span>APPELER
+                                    </span>
+                                </button>
+                            </a>
+                        </div>
+
+                        <!--<div class="col-xs-6" ng-show="geolocalized">-->
+                        <div ng-class="{'col-xs-6' : storesCallDisplayed.toString() == 'true' && closestStore.phone, 'col-xs-12' : storesCallDisplayed.toString() == 'false' || !closestStore.phone}"
+                            ng-if="storesItiDisplayed" ng-show="geolocalized">
+                            <!--<button  ng-disabled="!routeBtnEnabled" type="button" class="btn btn-default js-go-to-shop" ng-click="openMapsRoute()" ng-style="{'background' : colorprimary, 'color': colorsecondary}">-->
+                            <button ng-disabled="!routeBtnEnabled" type="button" class="btn btn-default js-go-to-shop" ng-click="openMapsRoute(closestStore.lat,closestStore.lng)"
+                                ng-style="{'background' : titles.itinerary.bgColor, 'color': titles.itinerary.txtColor}">
+                                <span ng-show="!routeBtnEnabled">
+                                    LOCALISATION...
+                                </span>
+                                <span ng-show="routeBtnEnabled" style="text-align:center !important;margin-left: -2px;">
+                                    <span class="glyphicon glyphicon-road spanIti"></span>ITINERAIRE
+                                </span>
+                            </button>
+                        </div>
+
+                        <div class="col-xs-12 actions-last-button" ng-if="allStoresDisplayed" ng-show="storeSize > 1">
+                            <!--<button ng-click="openStoresMap()" type="button" class="white-space-normal btn btn-default js-go-to-all" ng-style="{'background' : colorprimary, 'color': colorsecondary}">-->
+                            <button ng-click="openStoresMap()" type="button" class="white-space-normal btn btn-default js-go-to-all" ng-style="{'background' : titles.allStores.bgColor, 'color': titles.allStores.txtColor}">
+                                <span class="glyphicon glyphicon-globe"></span>{{titles.allStoreTitle}}
+                            </button>
+                        </div>
+                    </div>
+
+                    <div ng-class="{'hide' : hasStores || !editMode}" class="text-center">
+                        Aucun point de vente renseigné
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div ng-if="geolocCurrentType == 'custom'">
+    <div class="row actions" ng-show="storesDisplayed" ng-style="{'background' : titles.bgColor, 'color': titles.txtColor}">
+        <div class="col-xs-12 active_wrapper">
+            <div class="col-xs-10 col-xs-offset-1 ">
+                <div>
+                    <div>
+                        <div class="col-xs-12">
+                            <div class="adresse-title">
+                                <span class="glyphicon glyphicon-map-marker" ng-if="titles.realTxtCustomTitle.length > 0"></span>
+                                <!--<h2>{{titles.title}}</h2>-->
+                                <h2>{{titles.realTxtCustomTitle}}</h2>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="adresse" ng-style="{'background' : titles.address.bgColor, 'color': titles.address.txtColor}">
+                                <!--Custom Type-->
+                                <div class="adresse-shopname">{{titles.realTxtStoresName}}</div>
+                                <div ng-if="titles.realTxtStoresAdA">{{titles.realTxtStoresAdA}}</div>
+                                <div ng-if="titles.realTxtStoresAdB">{{titles.realTxtStoresAdB}}</div>
+                                <div ng-if="titles.realTxtStoresAdC">{{titles.realTxtStoresAdC}}</div>
+                                <div>{{titles.realTxtStoresPostC}} {{titles.realTxtStoresTown}}</div>
+                                <div><span class="glyphicon glyphicon-time iconTime" ng-if="titles.realTxtStoresOpenHour.length > 0"></span>{{titles.realTxtStoresOpenHour}}</div>
+                            </div>
+                        </div>
+
+                        <!--<div class="col-xs-6" ng-if="storesCallDisplayed" ng-show="geolocalized">-->
+                        <div ng-class="{'col-xs-6' : storesItiDisplayed.toString() == 'true' && titles.realTxtStoresPhone && titles.realTxtStoresPhone!='', 'col-xs-12' : storesItiDisplayed.toString() == 'false'}"
+                            ng-if="storesCallDisplayed && titles.realTxtStoresPhone && titles.realTxtStoresPhone!=''">
+                            <a ng-href="{{ 'tel:' + titles.realTxtStoresPhone }}">
+                                <!--<button type="button" class="btn btn-default" ng-style="{'background' : colorprimary, 'color': colorsecondary}">-->
+                                <button type="button" class="btn btn-default" ng-style="{'background' : titles.call.bgColor, 'color': titles.call.txtColor}">
+                                    <span style="text-align:center !important;margin-left: -2px;">
+                                        <span class="glyphicon glyphicon-earphone"></span>APPELER
+                                    </span>
+                                </button>
+                            </a>
+                        </div>
+                        <!--<div class="col-xs-6" ng-show="geolocalized">-->
+                        <div ng-class="{'col-xs-6' : storesCallDisplayed.toString() == 'true' && titles.realTxtStoresPhone, 'col-xs-12' : storesCallDisplayed.toString() == 'false' || titles.realTxtStoresPhone=='' || !titles.realTxtStoresPhone}"
+                            ng-if="storesItiDisplayed">
+                            <!--<button  ng-disabled="!routeBtnEnabled" type="button" class="btn btn-default js-go-to-shop" ng-click="openMapsRoute()" ng-style="{'background' : colorprimary, 'color': colorsecondary}">-->
+                            <button type="button" class="btn btn-default js-go-to-shop" ng-click="openMapsRoute(titles.realTxtStoresLat,titles.realTxtStoresLong)"
+                                ng-style="{'background' : titles.itinerary.bgColor, 'color': titles.itinerary.txtColor}">
+
+                                <span style="text-align:center !important;margin-left: -2px;">
+                                    <span class="glyphicon glyphicon-road spanIti"></span>ITINERAIRE
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

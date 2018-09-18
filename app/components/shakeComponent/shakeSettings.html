@@ -1,0 +1,27 @@
+<div>
+    <div class="col-xs-12 settings_header panel-heading">
+        <div class="settings_title">
+            <a ng-click="previous()" class="navigation">
+                <i class="glyphicon glyphicon-chevron-left pull-left"></i>
+            </a>
+            <a ng-click="next()" class="navigation">
+                <i class="glyphicon glyphicon-chevron-right pull-right"></i>
+            </a>
+            Image à secouer
+        </div>
+    </div>
+
+    <div class="col-xs-12 panel-body settings_body">
+        <ul class="nav nav-tabs">
+            <li role="presentation" ng-class="{active: (nav.toString() == 'images')}">
+                <a href="" ng-click="nav='images'" >Image(s) à secouer</a>
+            </li>
+            <li role="presentation" ng-class="{active: (nav.toString() == 'parametres')}">
+                <a href="" ng-click="nav='parametres'">Paramètres avancés</a>
+            </li>
+        </ul>
+        <br/>
+        <div ng-include src="'components/shakeComponent/imagesSettings.html'" ng-if="nav=='images'"></div>
+        <div ng-include src="'components/shakeComponent/parametresSettings.html'" ng-if="nav=='parametres'"></div>
+    </div>
+</div>

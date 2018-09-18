@@ -1,0 +1,254 @@
+<div ng-controller="FormLayoutSettingsCtrl">
+    <div class="row">
+        <div class="col-md-5">
+            <div class="form-group no-padder m-t-md">
+                <div class="col-xs-8 control-label text-left no-padder">Afficher le formulaire</div>
+                <div class="col-xs-2"><div ng-init="formShowBox = (formShowBox.toString() == 'true' ? true : false)" ng-model="formShowBox" ng-click="clickFormShowBox();" ios-switch></div></div>
+            </div>
+        </div>
+         <div class="col-md-7" ng-if="layouts.position.id == 1" style="padding-top:4px;">
+            <select class="form-control" ng-model="layouts.position.subPosition" ng-show="formShowBox">
+                <option ng-selected="layouts.position.subPosition == 5" value="5" selected>Sur la page principale</option>
+                <option value="1000">Sur une page séparée</option>
+            </select>
+        </div> 
+    </div>
+    
+    <div class="clearfix"></div>
+
+    <div class="row col-md-12" ng-show="formShowBox && layouts.position.subPosition == '1000'">
+        <em>Votre formulaire sera affiché dans une page séparée de votre mini-site.
+        Pensez à indiquer depuis quel URL il sera accessible, en le définissant dans les zones de paramétrage d'URL du mini-site.
+        </em>
+    </div>
+
+    <div class="clearfix"></div>
+    <br/>
+
+    <div class="row" ng-show="formShowBox && layouts.position.subPosition == '1000'">
+        <div class="col-md-10 text-left">
+            <input type="text" class="form-control"  ng-model="linkForm" disabled>
+        </div>
+        <div class="col-md-2">
+            <button ng-copy="linkForm" onSuccess="console.log('copy')" class="btn btn-primary btn-md pull-right">Copier</button>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+
+    <div ng-show="formShowBox">
+        <div class="clearfix"></div>
+        <br />
+        <div>
+            <strong>Texte d'introduction</strong>
+            <textarea class="form-control summernote_form_introduction" name="form-introduction" ng-bind-html="introduction | unsafe"></textarea>
+        </div>
+        <div class="clearfix"></div>
+        <br />
+        <strong>
+            <button class="btn btn-primary" ng-click="colorsEditBtn=!colorsEditBtn">
+                <i class="glyphicon glyphicon-plus"  ng-if="!colorsEditBtn"></i>
+                <i class="glyphicon glyphicon-minus " ng-if="colorsEditBtn"></i>
+                Couleurs
+            </button>
+        </strong>
+        <div class="clearfix"></div>
+        <br />
+        <div ng-hide="!colorsEditBtn" class="col-xs-12 control-label text-left">
+            <div class="row">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <div class="col-xs-5 control-label text-left">Couleur de fond (introduction)</div>
+                        <div class="col-xs-1">
+                            <div class="colorpicker color_backgroundIntroduction" ng-style="{'background-color': layouts.colors.backgroundIntroduction}"></div>
+                        </div>
+                        <div class="col-xs-5 control-label text-left">Couleur de fond du champ</div>
+                        <div class="col-xs-1">
+                            <div class="colorpicker color_bgField" ng-style="{'background-color': layouts.colors.backgroundField}"></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="row">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <div class="col-xs-5 control-label text-left">Couleur de fond (formulaire)</div>
+                        <div class="col-xs-1">
+                            <div class="colorpicker color_background" ng-style="{'background-color': layouts.colors.background}"></div>
+                        </div>
+                        <div class="col-xs-5 control-label text-left">Couleur de texte du champ</div>
+                        <div class="col-xs-1">
+                            <div  class="colorpicker color_textField" ng-style="{'background-color': layouts.colors.textField}"></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="row">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <div class="col-xs-5 control-label text-left">Couleur de texte</div>
+                        <div class="col-xs-1">
+                            <div class="colorpicker color_text" ng-style="{'background-color': layouts.colors.text}"></div>
+                        </div>
+                        <div class="col-xs-5 control-label text-left">Couleur de bordure du champ</div>
+                        <div class="col-xs-1">
+                            <div class="colorpicker color_border" ng-style="{'background-color': layouts.colors.edgeTextField}"></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="clearfix"></div>
+            <br />
+        </div>
+        <strong>
+            <button class="btn btn-primary" ng-click="styleEditBtn=!styleEditBtn">
+                <i class="glyphicon glyphicon-plus" ng-if="!styleEditBtn"></i>
+                <i class="glyphicon glyphicon-minus" ng-if="styleEditBtn"></i>
+                Style
+            </button>
+        </strong>
+        <div class="clearfix"></div>
+        <br />
+        <div ng-show="styleEditBtn" class="col-xs-12 control-label text-left">
+            <div class="row">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <div class="col-xs-3 control-label text-left">Police</div>
+                        <div class="col-xs-3">
+                            <select class="form-control" ng-model="layouts.styles.font" ng-style="{'font-family': layouts.styles.font}">
+                                <option ng-selected="{{fontName == layouts.styles.font}}" ng-style="{'font-family': fontName}" value="{{fontName}}" ng-repeat="fontName in fontNames ">{{fontName}}</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-4 control-label text-left">Gras</div>
+                        <div class="col-xs-2">
+                            <div style="margin-left: 18px; margin-top: 7px;" ng-init="layouts.styles.bold = (layouts.styles.bold.toString() == 'true' ? true : false)" ng-model="layouts.styles.bold" ng-click="layouts.styles.bold=!layouts.styles.bold"  ios-switch></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="row">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <div class="col-xs-3 control-label text-left">Taille du texte</div>
+                        <div class="col-xs-3" style="margin-top:5px;">
+                            <input class="styleTextSizeSlider" style="width: 134px;" type="text" />
+                        </div>
+                        <div class="col-xs-4 control-label text-left">Souligné</div>
+                        <div class="col-xs-2">
+                            <div style="margin-left: 18px; margin-top: 7px;" ng-init="layouts.styles.underlined = (llayouts.styles.underlined.toString() == 'true' ? true : false)" ng-model="layouts.styles.underlined" ng-click="layouts.styles.underlined=!layouts.styles.underlined" ios-switch></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="row">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <div class="col-xs-5 control-label text-left"></div>
+                        <div class="col-xs-1"></div>
+                        <div class="col-xs-4 control-label text-left">Italique</div>
+                        <div class="col-xs-2">
+                            <div style="margin-left: 18px; margin-top: 7px;" ng-init="layouts.styles.italic = (layouts.styles.italic.toString() == 'true' ? true : false)" ng-model="layouts.styles.italic" ng-click="layouts.styles.italic=!layouts.styles.italic" ios-switch></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="clearfix"></div>
+            <br />
+        </div>
+
+        <strong>
+            <button class="btn btn-primary" ng-click="btnValidationEditBtn=!btnValidationEditBtn">
+                <i class="glyphicon glyphicon-plus" ng-if="!btnValidationEditBtn"></i>
+                <i class="glyphicon glyphicon-minus" ng-if="btnValidationEditBtn"></i>
+                Bouton de validation
+            </button>
+        </strong>
+
+        <div class="clearfix"></div>
+        <br />
+        <div ng-show="btnValidationEditBtn">
+            <div class="col-xs-12 control-label text-left">
+                <div class="row">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <div class="col-xs-5 control-label text-left">Couleurs</div>
+                            <div class="col-xs-1">
+                                <div class="colorpicker color_btnBackground" ng-style="{'background-color': layouts.buttonValidation.colors.background}"></div>
+                            </div>
+                            <div class="col-xs-3 control-label text-left">Libellé</div>
+                            <div class="col-xs-3 control-label text-left">
+                                <input type="text" ng-model="layouts.buttonValidation.label" class="form-control " style="margin-top: -8px" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="clearfix"></div>
+                <br />
+
+                <div class="row">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <div class="col-xs-5 control-label text-left">Couleur de bordure</div>
+                            <div class="col-xs-1">
+                                <div class="colorpicker color_btnEdges" ng-style="{'background-color': layouts.buttonValidation.colors.edges}"></div>
+                            </div>
+                            <div class="col-xs-3 control-label text-left">Police de caractère</div>
+                            <div class="col-xs-3 control-label text-left">
+                                <select class="form-control" ng-model="layouts.buttonValidation.font" ng-style="{'font-family': layouts.buttonValidation.font}" style="margin-top: -6px">
+                                    <option ng-selected="{{fontName  == layouts.buttonValidation.font}}" ng-style="{'font-family': fontName}"   value="{{fontName}}" ng-repeat="fontName in fontNames ">{{fontName}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="clearfix"></div>
+                <br />
+
+                <div class="row">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <div class="col-xs-5 control-label text-left">Couleur de texte</div>
+                            <div class="col-xs-1">
+                                <div class="colorpicker color_btnText" ng-style="{'background-color': layouts.buttonValidation.colors.text}"></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+            <br />
+
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="row">
+                        <div class="col-xs-12">Taille des arrondis</div>
+                    </div> 
+                    <br/>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <input class="roundEdgesSlider" type="text" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="row">
+                        <div class="col-xs-12">Taille du texte</div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <input class="textSizeSlider" type="text" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>  
+</div>

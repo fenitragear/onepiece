@@ -1,0 +1,68 @@
+
+<div class="modal-header"><h3 class="modal-title">Paramètres de l'image</h3></div>
+
+<div class="modal-body scratch" ng-show="selectedType=='gagnant_perdant'">
+    <div class="m-t-md no-padder">
+        <label class="control-label col-xs-4">Nombre de gagnants</label>
+        <div class="col-xs-8"><input type="text" class="form-control input-sm" ng-model="nb"></div>
+    </div>
+</div>
+<div class="modal-body scratch form-horizontal" ng-show="selectedType=='dynamique_pourcent'">
+    <div class="form-group">
+        <label class="control-label col-xs-5">Nom de l'image</label>
+        <div class="col-xs-7" style="padding-left: 0;"><input type="text" min="0" max="100" class="form-control input-sm" ng-model="name" ></div>
+    </div>
+    <div class="form-group" style="margin-bottom:5px!important;">
+        <label class="col-xs-12 text-left">Indiquez ci-dessous quel % de destinataire verront cette image</label>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-5">Pourcentage de destinataires</label>
+        <div class="col-xs-7" style="padding-left: 0;"><input type="number" min="0" max="100" class="form-control input-sm" ng-model="percent"></div>
+    </div>
+    <div ng-show="error" class="alert alert-danger" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span>
+        Le total des pourcentages dépasse 100
+    </div>
+</div>
+<div class="modal-body scratch form-horizontal" ng-show="selectedType=='dynamique_nombre'">
+    <div class="form-group">
+        <label class="control-label col-xs-5">Nom de l'image</label>
+        <div class="col-xs-7" style="padding-left: 0;"><input type="text" min="0" max="100" class="form-control input-sm" ng-model="name"></div>
+    </div>
+    <div class="form-group" style="margin-bottom:5px!important;">
+        <label class="col-xs-12 text-left">Indiquez ci-dessous quel nombre de destinataire verront cette image</label>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-4">Nombre de destinataires</label>
+        <div class="col-xs-8" style="padding-left: 0;"><input type="number" min="0" class="form-control input-sm" ng-model="nombre"></div>
+    </div>
+</div>
+<div class="modal-body scratch form-horizontal" ng-show="selectedType=='personnalise'">
+    <div class="form-group" style="margin-bottom:5px!important;">
+        <img class="col-xs-2" ng-src="{{src}}">
+        <label class="col-xs-10 text-left">Indiquez ci-dessous quels destinataires de votre liste verront cette image. Pour cela, sélectionnez le champs de votre liste qui contient l’information et indiquez la valeur du champs</label>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-4">Nom de l'image </label>
+        <div class="col-xs-8"><input type="text" min="0" max="100" class="form-control input-sm" ng-model="name" placeholder="Donnez un nom à votre image"></div>
+    </div>
+    	
+    <div class="form-group">
+        <label class="control-label col-xs-4">Champs de ma liste</label>
+        <div class="col-xs-8">
+            <select class="form-control" ng-model="tag">
+                <option ng-repeat="option in tagOptions">{{option.name}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-4">Valeur du champs</label>
+        <div class="col-xs-8"><input type="text" class="form-control input-sm" ng-model="valeur"></div>
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()">Valider</button>
+    <button class="btn btn-warning" ng-click="cancel()">Annuler</button>
+</div>

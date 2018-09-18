@@ -1,0 +1,14 @@
+<div class="clearfix"></div>
+<div class="active_wrapper">
+    <div class="player" id="player" ng-if="settings.displayed && settings.src != '' && editmode==false">
+        <embed-video width="100%" autoplay="{{settings.autoplay}}" loop="{{settings.loop}}" iframe-id="embedVideoId" enablejsapi="1" playlist="{{playlist}}"
+            ng-href="{{settings.src}}">
+            <a href="{{settings.src}}">Watch</a>
+        </embed-video>
+    </div>
+	<div class="videoThumb" ng-if="settings.displayed && settings.src != '' && editmode==true">
+		<img src="{{videoThumbSrc}}" />
+	</div>
+	<img id="removeVideoOverlay" class="videooverlay" ng-class="{'absolute':settings.displayed && settings.src != ''}"/>
+</div>
+

@@ -1,0 +1,20 @@
+<div class="active_wrapper barcodeComponent"  ng-show="settings.displayed" ng-style="{'font-family': settings.allFontName, 'background-color': settings.description.bgColor }">
+	<div class="row" ng-show="settings.titre.display">
+		<div class="col-xs-12 barcode-titre" ng-bind-html="settings.titre.realText | unsafe">
+		</div>
+	</div>
+
+	<div class="col-xs-12 barClass" ng-if="settings.modeType=='unitaire'" netbarcodeunitaire>
+		<div class="centerBarcode">
+			<img id="codeBarre" />
+			<span id="invalid" style="color: red ">Entrée invalide pour ce type de Code barre</span>
+		</div>
+	</div>
+
+	<div class="col-xs-12 barClass" ng-if="settings.modeType=='personalise'" netbarcodeperso>
+		<div class="centerBarcode">
+			<img id="codeBarrePerso" />
+			<span id="invalidperso" style="color: red ">Entrée invalide pour ce type de Code barre</span>
+		</div>
+	</div>
+</div>

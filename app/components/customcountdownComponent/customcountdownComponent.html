@@ -1,0 +1,61 @@
+<div class="active_wrapper ct-wrapper-event" ng-show="settings.displayed" ng-style="{'font-family': settings.allFontName, 'background-color': settings.introduction.bgColor }">
+    <div class="col-xs-12">
+        <div class="row" ng-show="settings.introduction.displayed">
+            <div class="col-xs-12 ct-desc-event" ng-bind-html="settings.introduction.realText | unsafe"></div>
+        </div>
+        <div class="row" ng-if="editmode" ng-show="settings.expiration.preview">
+            <div class="col-xs-12 ct-expired-text" style="color: {{settings.expiration.font.color}}"><pre ng-style="{'font-size': settings.expiration.font.size +'px'}">{{settings.realTxtEndMessage | unsafe}}</pre></div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="row" ng-if="!editmode || !settings.expiration.preview" ng-show="settings.expiration.trueDisplay">
+            <div class="col-xs-12 ct-expired-text" style="color: {{settings.expiration.font.color}}"><pre ng-style="{'font-size': settings.expiration.font.size +'px'}">{{settings.realTxtEndMessage | unsafe}}</pre></div>
+            <div class="clearfix"></div>
+        </div>
+        <div id="clockdiv" class="netctimer row" datesettings="settings" data-ng-class="{clickable : settings.counter.url.length > 0}"
+            ng-show="(settings.expiration.displayed.toString() == 'true' ? true : false)">
+            <div class="numbers-container" ng-click="countdownOpenLink()" ng-style="{'font-family': settings.allFontName}">
+                <div>
+                    <div id="clockdivDays" class="days ctclock" ng-style="{'background-color':settings.counter.bgColor, 'color':settings.counter.font.color, 'font-size':settings.counter.font.size - (settings.counter.font.size / 5) +'px','-webkit-border-radius':settings.counter.bradius + 'px', '-moz-border-radius':settings.counter.bradius + 'px' , 'border-radius':settings.counter.bradius + 'px' }">{{NbrTxtDay}}</div>
+                    <div class="smalltext" ng-style="{'color':settings.counter.font.lblcolor, 'font-size':settings.counter.font.lblsize - (settings.counter.font.lblsize / 5) +'px'}"
+                        ng-bind-html="settings.realTxtDay | unsafe" ng-show="settings.nbreLabel.displayed"></div>
+                </div>
+                <div>
+                    <div id="clockdivHours" class="hours ctclock" ng-style="{'background-color':settings.counter.bgColor, 'color':settings.counter.font.color, 'font-size':settings.counter.font.size - (settings.counter.font.size / 5) +'px','-webkit-border-radius':settings.counter.bradius + 'px', '-moz-border-radius':settings.counter.bradius + 'px' , 'border-radius':settings.counter.bradius + 'px' }">{{NbrTxtHour}}</div>
+                    <div class="smalltext" ng-style="{'color':settings.counter.font.lblcolor, 'font-size':settings.counter.font.lblsize - (settings.counter.font.lblsize / 5) +'px'}"
+                        ng-bind-html="settings.realTxtHour | unsafe" ng-show="settings.nbreLabel.displayed"></div>
+                </div>
+                <div>
+                    <div id="clockdivMinutes" class="minutes ctclock" ng-style="{'background-color':settings.counter.bgColor, 'color':settings.counter.font.color, 'font-size':settings.counter.font.size - (settings.counter.font.size / 5) +'px','-webkit-border-radius':settings.counter.bradius + 'px', '-moz-border-radius':settings.counter.bradius + 'px' , 'border-radius':settings.counter.bradius + 'px' }">{{NbrTxtMin}}</div>
+                    <div class="smalltext" ng-style="{'color':settings.counter.font.lblcolor, 'font-size':settings.counter.font.lblsize - (settings.counter.font.lblsize / 5) +'px'}"
+                        ng-bind-html="settings.realTxtMinute | unsafe" ng-show="settings.nbreLabel.displayed"></div>
+                </div>
+                <div>
+                    <div id="clockdivSeconds" class="seconds ctclock" ng-style="{'background-color':settings.counter.bgColor, 'color':settings.counter.font.color, 'font-size':settings.counter.font.size - (settings.counter.font.size / 5) +'px','-webkit-border-radius':settings.counter.bradius + 'px', '-moz-border-radius':settings.counter.bradius + 'px' , 'border-radius':settings.counter.bradius + 'px' }">{{NbrTxtSec}}</div>
+                    <div class="smalltext" ng-style="{'color':settings.counter.font.lblcolor, 'font-size':settings.counter.font.lblsize - (settings.counter.font.lblsize / 5) +'px'}"
+                        ng-bind-html="settings.realTxtSecond | unsafe" ng-show="settings.nbreLabel.displayed"></div>
+                </div>
+            </div>
+            <div class="row ct-date-event"  ng-show="settings.endDateDisplayed">
+                <div ng-style="{'font-family': settings.allFontName}">
+                    <div class="col-xs-12" ng-bind-html="settings.realEndDate" ng-style="{'color':settings.counter.font.lblcolor, 'font-size':settings.endDateFontSize +'px'}"></div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div ng-show="settings.calagenda.displayed">
+                <div class="clearfix"></div>
+                <br>
+                <div class="agbtn row">
+                    <div class="col-xs-12">
+                        <a href="../server/files/{{cId}}/calendar/{{device}}event.ics" id="ct-date-agenda" class="ct-date-agenda" ng-style="{'font-family':settings.allFontName,'font-size':settings.calagenda.font.size +'px',
+                        'background-color':settings.calagenda.bgColor,
+                        'color':settings.calagenda.color,
+                        '-webkit-border-radius':settings.calagenda.bradius +'px',
+                        '-moz-border-radius':settings.calagenda.bradius +'px',
+                        'border-radius':settings.calagenda.bradius +'px'}" ng-bind-html="settings.realTxtAgendaBtn | unsafe"></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

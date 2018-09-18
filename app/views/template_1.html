@@ -1,0 +1,85 @@
+<div class="template">
+    <div class="template_wrapper col-xs-12 ">
+        <div class="container ">
+            <div class="row" id="simpleList">
+                <div id="row1"></div>
+                <div id="row2"></div>
+                <div id="row3"></div>
+                <div id="row4"></div>
+                <div id="row5"></div>
+                <div id="row6"></div>
+                <div id="row7"></div>
+                <div id="row8"></div>
+                <div id="row9"></div>
+                <div id="row10"></div>
+                <div class="row discount" id="discount"
+                    ng-hide="!logoData.displayed && (titleTextLength == 0 || !titleData.displayed)"
+                    ng-class="{'no-padder-top' : logoData.size == 100 || !logoData.displayed, 'no-padder-bottom' : titleTextLength == 0 && logoData.size == 100, 'draggablecomponent':editmode }"
+                    ng-style="{'background': titleData.bgColor, 'color': colorSecondary}"
+                    >
+
+                    <netLogo ng-click="changeUrl('logo')" settings="logoData"
+                            ng-class="{active : currentUrl == 'logo', logofloat : logoData.size <= 50, logoblock : logoData.size > 50}"
+                            ng-hide="!logoData.displayed"
+                            class="component" ng-style="{'width' : logoData.size + '%'}" >
+
+                            </netLogo>
+
+
+                    <netTitle ng-click="changeUrl('title')"  settings="titleData"
+                            ng-hide=" titleTextLength == 0"
+                            ng-class="{active : currentUrl == 'title', ltextfloat : logoData.size == 42, textfloat : logoData.size == 50 && logoData.displayed, textblock : logoData.size > 50 || !logoData.displayed}"
+                            class="component pull-right">
+
+                    </netTitle>
+
+                </div>
+                <div class="clearfix"></div>
+
+                <div id="slider" class="row" ng-show="(sliderData.showSlider.toString() == 'true')" ng-class="{'draggablecomponent':editmode}">
+                    <netSlider ng-style="{'background' : colorPrimary}" ng-click="changeUrl('slider')" class="slider component" settings="sliderData"  ng-class="{active : currentUrl == 'slider'}"></netSlider>
+                </div>
+                <div class="clearfix"></div>
+                
+                <div id="customcountdown" class="row" ng-class="{'draggablecomponent':editmode}" ng-show="(countdownData.displayed.toString() == 'true')">
+                    <netCountdown  ng-style="{'background' : colorPrimary, 'color': colorSecondary}" editmode="editmode" ng-click="changeUrl('customcountdown')" settings="countdownData" ng-class="{active : currentUrl == 'customcountdown'}" class="countdown component"></netCountdown>
+                </div>
+                <div class="clearfix"></div>
+                <div id="barcode" class="row" ng-class="{'draggablecomponent':editmode}" ng-show="(barcodeData.displayed.toString() == 'true')">
+                    <netbarcode  ng-style="{'background' : colorPrimary, 'color': colorSecondary}" editmode="editmode" ng-click="changeUrl('barcode')" settings="barcodeData" ng-class="{active : currentUrl == 'barcode'}" class="component"></netbarcode>
+                </div>                
+                <div class="clearfix"></div>
+                <div id="scratch" class="row" ng-show="(scratchData.showScratch.toString() == 'true')" ng-class="{'draggablecomponent':editmode}">
+                    <netScratch ng-style="{'background' : colorPrimary}" ng-click="changeUrl('scratch')" class="scratch component" settings="scratchData" editmode="editmode" ng-class="{active : currentUrl == 'scratch'}"></netScratch>
+                </div>
+
+				<div class="clearfix"></div>
+                <div id="shake" class="row" ng-show="(shakeData.showShake.toString() == 'true')" ng-class="{'draggablecomponent':editmode}">
+                    <netShake ng-style="{'background' : colorPrimary}" ng-click="changeUrl('shake')" class="shake component" settings="shakeData" editmode="editmode" ng-class="{active : currentUrl == 'shake'}"></netShake>
+                </div>
+                
+				<div class="clearfix"></div>
+                <div id="video" class="row" ng-show="(videoData.displayed.toString() == 'true')" ng-class="{'draggablecomponent':editmode}">
+                    <netVideo ng-click="changeUrl('video')" settings="videoData" ng-class="{active : currentUrl == 'video'}" ng-hide="!videoData.displayed || (videoData.src=='' && !editmode)" class="component" editmode="editmode" ></netVideo>
+                </div>				
+                <div class="clearfix"></div>
+                
+                <netText id="text" ng-style="{'background' : colorPrimary, 'color': colorSecondary}" ng-click="changeUrl('text')"  settings="textData" ng-class="{active : currentUrl == 'text', 'draggablecomponent':editmode}" class="component row offers"></netText>
+                <div class="clearfix"></div>
+                <netStores id="stores" ng-click="changeUrl('stores')" settings="storesData" titles="storeTitlesData" colorprimary="colorPrimary" colorsecondary="colorSecondary" ng-class="{active : currentUrl == 'stores', 'draggablecomponent':editmode}" class="component"></netStores>
+                
+                <!-- <hr ng-show="cguData.displayed" /> -->
+
+                <netCgu id="cgu" ng-click="changeUrl('cgu')" settings="cguData" ng-class="{active : currentUrl == 'cgu'}" class="component draggablecomponent" ng-show="cguData.displayed"></netCgu>
+
+                <div class="clearfix"></div>
+                <netForm id="form" ng-style="{'color': colorSecondary}" ng-click="changeUrl('form')" ng-show="(formData.formShow.toString() == 'true') && (formData.layouts.position.id == 1) && (formData.layouts.position.subPosition.toString() != '1000')"  settings="formData" ng-class="{active_form: (currentUrl == 'form'), 'draggablecomponent':editmode}" class="component"></netForm>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+
+
+    <netMap settings="storesData" id="map-panel" colorprimary="colorPrimary" colorsecondary="colorSecondary" ng-style="{'background' : colorPrimary}"></netMap>
+
+</div>

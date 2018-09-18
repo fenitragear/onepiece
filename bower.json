@@ -1,0 +1,14 @@
+{
+  "name": "smsresponsive",
+  "description": "Send responsive pages",
+  "main": "index.html",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

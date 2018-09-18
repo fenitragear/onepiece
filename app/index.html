@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en" ng-app="netMessage" ng-controller="mainCtrl">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="EXPIRES" CONTENT="Mon, 22 Jul 2002 11:12:01 GMT">
+
+    <title ng-bind="options.title">Voir mon offre</title>
+
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+
+    <link rel="stylesheet" href="css/app.css?version=19">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css?version=18">
+    <!--<link rel="stylesheet" href="bootstrap/css/bootstrap3.min.css?version=18">-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap-datetimepicker.min.css?version=18">
+    <link rel="stylesheet" href="bootstrap/fileinput/css/fileinput.min.css?version=18">
+    <link rel="stylesheet" href="bootstrap/colorpicker/css/colpick.css?version=18">
+    <link rel="stylesheet" href="bootstrap/multi-select/css/bootstrap-multiselect.css?version=18">
+    <link rel="stylesheet" href="js/libs/sortable.css?version=18">
+    <link rel="stylesheet" href="js/libs/slider.css?version=18">
+    <link rel="stylesheet" href="js/libs/ui-switch.min.css?version=18">
+    <link rel="stylesheet" href="js/libs/codemirror/codemirror.css?version=18">
+    <link rel="stylesheet" href="bootstrap/datepicker/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="bootstrap/bootstrap-select.min.css">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="bootstrap/bootstrap-select.min.css">
+    <link rel="stylesheet" href="css/jquery.mobile.flip.min.css" />
+    <link rel="stylesheet" href="css/croppie.css"/>
+    <link rel="stylesheet" href="css/fontawesome.min.css"/>
+
+</head>
+
+<body class="body_index">
+    <div class="body_subheader">
+        <a href="page.html#/page/{{clientId}}" target="_blank">Accéder à la page publique</a>
+        <ul style="font-size: 12px;  padding-top: 0px; margin-top: -4px;position:absolute;top:15px;right:15px;" class="nav nav-pills pull-right hide"
+            id="toggleBtnModeSettings">
+            <li class="active showClientId" ng-hide="idShown">
+                <a ng-click="showHideID()" href="javascript:">Voir l'ID auto</a>
+            </li>
+            <li class="active clientId" ng-hide="!idShown">
+                <div class="col-xs-12 panel-success panel alert-success text-center m-b-none">
+                    <span class="biggerBold">
+                        <input id="clientIdInput" type="text" value="{{clientIdValue}}" disabled style="width:185px;font-size:14px;border:none;"
+                        />
+                    </span>
+                    <button ng-click="showHideID()" class="btn btn-default btn-xs pull-right">
+                        <i class="glyphicon glyphicon-remove "></i>
+                    </button>
+                    <button ng-copy="clientIdValue" onSuccess="console.log('copy')" class="btn btn-primary btn-xs pull-right">Copier</button>
+                </div>
+
+            </li>
+            <li role="presentation" class="active" ng-hide="( currentUrl != 'expertMode')">
+                <a ng-click="switchMode(1)" href="javascript:">Retour au mode assisté</a>
+            </li>
+            <li role="presentation" class="active" ng-hide="( currentUrl == 'expertMode')">
+                <a ng-click="switchMode(2)" href="javascript:">Passer en mode expert</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="wrapper_body">
+        <div class="OrderIcon ">
+            <div class="col-xs-12 no-padder overflow-hidden orderContainer">
+                <!-- <button ng-repeat="order in ordersdata" ng-class="{active : currentUrl == '{{order}}'}" ng-click="changeURL('{{order}}')" style="width: 50%;float: left;" class="form-control btn btn-xs btn-primary">{{order}}</button> -->
+                <button ng-class="{active : currentUrl == 'options',orderactive : currentUrl == 'options'}" ng-click="changeURL('options')" class="orderComponent">
+                    <span class="iconMenu">
+                        <i class="fa fa-tint"></i>
+                    </span>
+                    Couleurs
+                </button>
+                <button ng-mouseover="countlogo = 1" ng-mouseout="countlogo = 0" ng-class="{active : currentUrl == 'logo',orderactive : currentUrl == 'logo'}" ng-click="changeURL('logo')" class="orderComponent">
+                    <span ng-if="currentUrl != 'logo' && countlogo==0" class="iconMenu">
+                        <img class="ordericons" src="img/bandeauicons/orderlogo.svg" />
+                    </span>
+                    <span ng-if="currentUrl == 'logo' || countlogo == 1" class="iconMenu">
+                        <img class="ordericons" src="img/bandeauicons/orderlogoactive.svg" />
+                    </span>
+                    Mon logo
+                </button>
+
+                <button  ng-class="{active : currentUrl == 'title',orderactive : currentUrl == 'title'}" ng-click="changeURL('title')" class="orderComponent">
+                    <span class="iconMenu">
+                        <i class="fa fa-bolt"></i>
+                    </span>
+                    Mon offre
+                </button>
+                <button ng-class="{active : currentUrl == 'slider',orderactive : currentUrl == 'slider'}" ng-click="changeURL('slider')" class="orderComponent">
+                    <span class="iconMenu">
+                        <i class="fa fa-picture-o"></i>
+                    </span>
+                    Mes images
+                </button>
+                <button ng-mouseover="countscratch = 1" ng-mouseout="countscratch = 0" ng-class="{active : currentUrl == 'scratch',orderactive : currentUrl == 'scratch'}" ng-click="changeURL('scratch')" class="orderComponent specOrder">
+                    <span ng-if="currentUrl != 'scratch' && countscratch==0" class="iconMenu">
+                        <img class="ordericons" src="img/bandeauicons/orderscratch.png" />
+                    </span>
+                    <span ng-if="currentUrl == 'scratch' || countscratch == 1" class="iconMenu">
+                        <img class="ordericons" src="img/bandeauicons/orderscratchactive.png" />
+                    </span>
+                    Image à gratter
+                </button>
+                <button ng-mouseover="countshake = 1" ng-mouseout="countshake = 0" ng-class="{active : currentUrl == 'shake',orderactive : currentUrl == 'shake'}" ng-click="changeURL('shake')" class="orderComponent specOrder">
+                    <span ng-if="currentUrl != 'shake' && countshake==0" class="iconMenu">
+                        <img class="ordericons" src="img/bandeauicons/ordershake.png" />
+                    </span>
+                    <span ng-if="currentUrl == 'shake' || countshake == 1" class="iconMenu">
+                        <img class="ordericons" src="img/bandeauicons/ordershakeactive.png" />
+                    </span>
+                    Image à secouer
+                </button>
+                <button ng-mouseover="customcountdown = 1" ng-mouseout="customcountdown = 0" ng-class="{active : currentUrl == 'customcountdown',orderactive : currentUrl == 'customcountdown'}" ng-click="changeURL('customcountdown')" class="orderComponent specOrder">
+                    <span ng-if="currentUrl != 'customcountdown' && customcountdown == 0" class="iconMenu">
+                        <img class="ordericons" style="width: 105%; padding-bottom: 3px;" src="img/bandeauicons/ordercountdown.png" />
+                    </span>
+                    <span ng-if="currentUrl == 'customcountdown' || customcountdown == 1" class="iconMenu">
+                        <img style="width: 105%; padding-bottom: 3px;" class="ordericons" src="img/bandeauicons/ordercountdownactive.png" />
+                    </span>
+                    Compte à rebours
+                </button>
+                <button  ng-class="{active : currentUrl == 'video',orderactive : currentUrl == 'video'}" ng-click="changeURL('video')" class="orderComponent">
+                    <span class="iconMenu">
+                        <i class="fa fa-play-circle"></i>
+                    </span>
+                    Ma vidéo
+                </button>
+                <button ng-mouseover="countstores = 1" ng-mouseout="countstores = 0" ng-class="{active : currentUrl == 'stores',orderactive : currentUrl == 'stores'}" id='storeO' ng-click="changeURL('stores'); buttonActive('storesO')" class="orderComponent specOrder">
+                    <span ng-if="currentUrl != 'stores' && countstores==0" class="iconMenu">
+                        <img class="ordericons" src="img/bandeauicons/ordergeoloc.png" />
+                    </span>
+                    <span ng-if="currentUrl == 'stores' || countstores == 1" class="iconMenu">
+                        <img class="ordericons" src="img/bandeauicons/ordergeolocactive.png" />
+                    </span>
+                    Point de vente
+                </button>
+                <button ng-class="{active : currentUrl == 'form',orderactive : currentUrl == 'form'}" ng-click="changeURL('form')" class="orderComponent">
+                    <span class="iconMenu">
+                        <i class="fa fa-check-square-o "></i>
+                    </span>
+                    Formulaire
+                </button>
+                <button ng-class="{active : currentUrl == 'text',orderactive : currentUrl == 'text'}" ng-click="changeURL('text')" class="orderComponent specOrder">
+                    <span class="iconMenu">
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    Texte & boutons
+                </button>
+                <button ng-class="{active : currentUrl == 'cgu',orderactive : currentUrl == 'cgu'}" ng-click="changeURL('cgu')" class="orderComponent">
+                    <span class="iconMenu">
+                        <i class="fa fa-asterisk"></i>
+                    </span>
+                    Conditions
+                </button>
+                <button ng-class="{active : currentUrl == 'barcode',orderactive : currentUrl == 'barcode'}" ng-click="changeURL('barcode')" class="orderComponent">
+                    <span class="iconMenu">
+                        <i class="fas fa-barcode"></i>
+                    </span>
+                    Code barre
+                </button>
+            </div>
+        </div>
+        <div class="floatComponent">
+        <div class="col-xs-12 no-padder overflow-hidden">
+            <div class="phone_menu_background col-xs-4">
+                <div class="phone_menu_content" data-ng-class="{'overflow-hidden' : mapMode}">
+                    <div class="col-xs-12 no-padder">
+                        <netTemplate clientid="clientId" templateid="currentTemplate" editmode="true" id="phoneTemplate"></netTemplate>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-8 no-padder settings_wrapper">
+                <div class="settings_container">
+                    <div ng-if="true" ng-view class="settings" autoscroll="true" data-ng-class="transitionClass"></div>
+                </div>
+            </div>
+        </div>
+        <script id="template/pagination/pager.html" type="text/ng-template">
+            <ul class="pager" style="margin: 0px;">
+                <li ng-class="{disabled: noPrevious(), previous: align}" class="text-primary"><a href style="padding:0;border:0;" ng-click="selectPage(page - 1)"><span title="Aller à la ligne précédente" class="glyphicon glyphicon-chevron-left"></span></a></li>
+                <span id="fakeCurrentPage"></span>
+                <li ng-class="{disabled: noNext(), next: align}" class="text-primary"><a href style="padding:0;border:0;" ng-click="selectPage(page + 1)"><span title="Aller à la ligne suivante" class="glyphicon glyphicon-chevron-right"></span></a></li>
+            </ul>
+        </script>
+
+            <div class="col-xs-4 aligncenter bottom-nav-custom">
+                <!-- <a href="javascript:void(0)" ng-click="changeURL('options')" id="titleAndColor">Titre & couleurs</a> -->
+                <!-- &nbsp;&nbsp;&nbsp;&nbsp; -->
+                <!-- <div class="col-xs-1"></div> -->
+            <div style="display: inline-block;">
+                <pager align="false" total-items="totalItems" ng-model="currentPage" items-per-page="itemsPerPage" ng-change="pageChanged()"></pager>
+            </div>
+            <span style="visibility: hidden;" id="currentPage">{{currentPage}}</span>
+        </div>
+        </div>
+
+        <div class="col-xs-8"></div>
+
+
+    </div>
+
+
+    <div class="clearfix"></div>
+    <br/>
+    <br/>
+    <script src="js/utils.js?version=18"></script>
+
+    <script src="js/libs/jquery-1.11.0.min.js?version=18"></script>
+    <script src="js/libs/jquery.mobile.flip.js"></script>
+    <!--<script src="bootstrap/js/bootstrap.min.js?version=18"></script>-->
+    <!--<script src="bootstrap/js/bootstrap3.min.js?version=18"></script>-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="bootstrap/bootstrap-datetimepicker.min.js?version=18"></script>
+    <script src="bootstrap/moment.js?version=18"></script>
+    <script src="bootstrap/bootstrap-datetimepicker.fr.js?version=18"></script>
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
+    <!--<script src="js/scratch.min.js"></script>-->
+    <script src="js/wScratchPad.min.js"></script>
+    <script src="bootstrap/colorpicker/js/colpick.js?version=18"></script>
+    <script src="bootstrap/datepicker/bootstrap-datepicker.js"></script>
+    <script src="js/ckeditor/ckeditor.js?version=18"></script>
+    <script src="js/ckeditor/adapters/jquery.js?version=18"></script>
+
+    <script src="js/libs/swiper.min.js"></script>
+    <script src="js/angular/angular.min.js?version=18" type="text/javascript"></script>
+    <script src="js/angular/angular-route.min.js?version=18"></script>
+    <script src="js/angular/angular-touch.min.js?version=18"></script>
+    <script src="js/angular/angular-sanitize.min.js?version=18"></script>
+    <script src="js/angular/angular-animate.min.js?version=18"></script>
+    <script src="js/angular/bootstrap-datepicker.js?version=18"></script>
+    <script src="js/angular/ng-clipboard.js?version=18"></script>
+
+    <!--<script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAs3zh1-oNO3jkRqhJusSkZOkNmAkZlpbc'></script>-->
+    <script src='js/libs/googlemaps.js'></script>
+    <script src="bootstrap/lodash.js?version=18"></script>
+    <script src="bootstrap/angular-google-maps.js?version=18"></script>
+
+    <script src="bootstrap/bootstrap-ui.min.js?version=18"></script>
+
+    <script src="js/libs/ng-videosharing-embed.min.js?version=18"></script>
+    <script src="js/libs/sortable.js?version=18"></script>
+    <script src="js/libs/slider.js?version=18"></script>
+    <script src="js/libs/angular-slider.js?version=18"></script>
+    <script src="js/libs/ui-switch.min.js?version=18"></script>
+    <script src="js/libs/multiselect.js?version=18"></script>
+    <script src="js/libs/customselect.js?version=18"></script>
+    <script src="js/libs/timelist.js?version=18"></script>
+    <script src="js/libs/Sortable.min.js"></script>
+
+    <script src="js/libs/codemirror/codemirror.js?version=18"></script>
+    <script src="js/libs/codemirror/htmlmixed.js?version=18"></script>
+    <script src="js/libs/codemirror/javascript.js?version=18"></script>
+    <script src="js/libs/codemirror/css.js?version=18"></script>
+    <script src="js/libs/codemirror/xml.js?version=18"></script>
+    <script src="js/libs/JsBarcode.all.js?version=18"></script>
+    <script src="js/libs/jquery-barcode.js?version=18"></script>
+   
+
+
+    <script src="bootstrap/fileinput/js/fileinput.js?version=18"></script>
+
+    <!--<script src="https://cdn.jsdelivr.net/npm/angular-swiper@0.4.0/dist/angular-swiper.min.js"></script>-->
+
+    <script src="js/app.js?version=19"></script>
+    <script src="js/controllers/mainCtrl.js?version=19"></script>
+    <script src="js/controllers/pageCtrl.js?version=18"></script>
+    <script src="js/controllers/settingsCtrl.js?version=18"></script>
+    <script src="js/filters.js?version=18"></script>
+    <script src="js/directive.js?version=18"></script>
+
+    <script src="js/libs/shake.js?version=18"></script>
+
+    <script src="components/templateComponent/templateComponent.js?version=19"></script>
+    <script src="components/mapComponent/mapComponent.js?version=18"></script>
+
+    <script src="components/logoComponent/logoComponent.js?version=18"></script>
+    <script src="components/logoComponent/logoSettings.js?version=18"></script>
+
+    <script src="components/videoComponent/videoComponent.js?version=19"></script>
+    <script src="components/videoComponent/videoSettings.js?version=19"></script>
+
+    <script src="components/titleComponent/titleComponent.js?version=18"></script>
+    <script src="components/titleComponent/titleSettings.js?version=18"></script>
+
+    <script src="components/sliderComponent/sliderComponent.js?version=18"></script>
+    <script src="components/sliderComponent/sliderSettings.js?version=18"></script>
+
+    <script src="components/customcountdownComponent/customcountdownComponent.js?version=18"></script>
+    <script src="components/customcountdownComponent/customcountdownSettings.js?version=18"></script>
+
+    <script src="components/barcodeComponent/barcodeComponent.js?version=18"></script>
+    <script src="components/barcodeComponent/barcodeSettings.js?version=18"></script>
+
+    <script src="components/textComponent/textComponent.js?version=18"></script>
+    <script src="components/textComponent/textSettings.js?version=18"></script>
+
+    <script src="components/storesComponent/storesSettings.js?version=18"></script>
+    <script src="components/storesComponent/storesComponent.js?version=18"></script>
+
+    <script src="components/scratchComponent/scratchComponent.js?version=18"></script>
+    <script src="components/scratchComponent/scratchSettings.js?version=18"></script>
+
+    <script src="components/cguComponent/cguComponent.js?version=18"></script>
+    <script src="components/cguComponent/cguSettings.js?version=18"></script>
+
+    <script src="components/formComponent/formComponent.js?version=18"></script>
+    <script src="components/formComponent/formSettings.js?version=18"></script>
+
+    <script src="components/expertModeComponent/expertModeSettings.js?version=18"></script>
+
+    <script src="components/optionsComponent/optionsSettings.js?version=18"></script>
+	<script src="js/libs/croppie.js"></script>
+    <script src="components/shakeComponent/shakeComponent.js?version=18"></script>
+    <script src="components/shakeComponent/shakeSettings.js?version=18"></script>
+</body>
+
+</html>

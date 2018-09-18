@@ -1,0 +1,655 @@
+{
+    "modeSettings": {
+        "modeType":"1",
+        "modeTypeList":[ {
+            "name": "Basic", "id": "1"
+        }
+        ,
+        {
+            "name": "Expert", "id": "2"
+        }
+        ]
+    }
+    ,
+    "components": {
+        "general": {
+            "title": "", "color1": "#ffffff", "color2": "#cccccc"
+        }
+        ,
+        "logo": {
+            "displayed": "true", "size": "42", "src": "", "blank": "false", "formLink": "false"
+        }
+        ,
+        "video": {
+            "displayed": true, "autoplay": false, "loop": false, "src": ""
+        }
+        ,
+        "title": {
+            "bgColor":"#4b4b4b",
+            "text":"<p style=\"text-align: center;\"><span style=\"font-size: 18px; font-family: Arial;\">Jusqu’à -20%</span></p><p style=\"text-align: center;\"><span style=\"font-size: 14px; font-family: Arial;\">de remise</span></p><p style=\"text-align: center;\"><span style=\"font-size: 12px; font-family: Arial;\">Jusqu'au 17 mars</span></p>",
+            "displayed":"true"
+        },
+      "customcountdown":{
+        "displayed": "true",
+        "endDate":"",
+        "endDateDisplayed":"true",
+        "endDateFontSize":"20",
+        "allFontName": "",
+        "introduction":{
+          "displayed":"false",
+          "text": "<h3>Nom de l'événement</h3>",
+          "bgColor": "#4b4b4b",
+          "color": "FFF"
+        },
+        "nbreLabel":{
+          "displayed": "true",
+          "day" : "Jours",
+          "hour" : "Heures",
+          "minute" : "Minutes",
+          "second" : "Secondes"
+        },
+        "expiration":{
+          "displayed":"true",
+          "preview":"false",
+          "trueDisplay":"false",
+          "text": "L'offre a expiré",
+          "font": {
+            "size": "20",
+            "color": "FFF"
+          }
+        },
+          "calagenda":{
+              "displayed": "true",
+              "bgColor": "#FFFFFF",
+              "color": "#4b4b4b",
+              "font": {
+                  "size": "15"
+              },
+              "bradius": "8",
+              "btnText": "Ajouter au calendrier",
+              "displayedDefault":"false",
+              "description":{
+                  "text": "Description"
+              },
+              "place":{
+                  "text": "Lieu"
+              },
+              "title":{
+                  "text": "Titre"
+              },
+              "alarm":{
+                  "unitALert":"D",
+                  "valueALert":""
+              }
+          },
+        "counter":{
+            "bgColor": "#4b4b4b",
+            "url": "",
+            "newWindow": "true",
+            "bradius": "0",
+            "font":{
+                "size": "40",
+                "color": "#FFFFFF",
+                "lblsize": "15",
+                "lblcolor": "#FFFFFF"
+            },
+            "nbSpaceSize":"0"
+        }
+      },
+      "barcode":{
+        "displayed": "true",
+        "codeType": "code39",
+        "modeType": "unitaire",
+        "inputCodeNum": "123456789101",
+        "defaultValue": "",
+        "titre": {
+            "bgColor": "#ffffff",
+            "text": "Mon titre",
+            "display": "true"
+        }
+    },
+        "slider":{
+            "bgColor":"#4b4b4b",
+            "showSlider":"true",
+            "automatic":"false",
+            "sliderLoop":"false",
+            "sliderType":"Diaporama",
+            "nbImages":"3",
+            "effect":"Standard",
+            "bold" : "",
+            "italic" : "",
+            "underline" : "",
+            "linethrough" : "",
+            "spaceSize" : "0",
+            "imageFormat" : "square",
+            "textColor": "#4b4b4b",
+            "textSize":"13",
+            "font":{
+                "name":""
+            },
+            "button":{
+                "text":"J'achète",
+                "bgColor":"#4b4b4b",
+                "textColor":"#FFFFFF",
+                "textSize":"13"
+            },
+            "description":{
+                "textColor":"#4b4b4b"
+            },
+            "price":{
+                "textColor":"#4b4b4b",
+                "unit":"€"
+            }
+        },
+        "scratch": {
+            "showScratch":"true",
+            "ouvrir":"false",
+            "lien":"false",
+            "finScratchCallback":"finscratch.jpg",
+            "selectedType":"simple",
+            "imageSimpleList":[ {
+                "src": "../server/service/scratch/image_a_gratter.png", "progress": "0", "label": "Image à gratter", "$$hashKey": "01F"
+            },
+            {
+                "src": "../server/service/scratch/black.jpg", "progress": "0", "label": "Image après grattage", "imageInfos": "Image finale", "$$hashKey": "01G"
+            }
+            ],
+            "imageGagnantPerdantList":[ {
+                "src": "../server/service/scratch/image_a_gratter.png", "progress": "0", "label": "Image à gratter", "$$hashKey": "01R"
+            },
+            {
+                "src": "../server/service/scratch/black.jpg", "progress": "0", "label": "Image GAGNANT(S)", "$$hashKey": "01S"
+            },
+            {
+                "src": "../server/service/scratch/black.jpg", "progress": "0", "label": "Image PERDANT(S)", "$$hashKey": "01T"
+            }
+            ],
+            "imageDynamiquePourcentList":[ {
+                "src": "../server/service/scratch/image_a_gratter.png", "progress": "0", "label": "Image à gratter", "$$hashKey": "02A"
+            },
+            {
+                "src": "../server/service/scratch/black.jpg", "progress": "0", "label": "Après grattage", "$$hashKey": "02B"
+            },
+            {
+                "src": "../server/service/scratch/black.jpg", "progress": "0", "label": "Après grattage", "$$hashKey": "02N"
+            }
+            ],
+            "imageDynamiqueNombreList":[ {
+                "src": "../server/service/scratch/image_a_gratter.png", "progress": "0", "label": "Image à gratter", "$$hashKey": "02A"
+            },
+            {
+                "src": "../server/service/scratch/black.jpg", "progress": "0", "label": "Après grattage", "$$hashKey": "02B"
+            },
+            {
+                "src": "../server/service/scratch/black.jpg", "progress": "0", "label": "Après grattage", "$$hashKey": "02N"
+            }
+            ],
+            "imagePersonnaliseList":[ {
+                "src": "../server/service/scratch/image_a_gratter.png", "progress": "0", "label": "Image à gratter", "$$hashKey": "02U"
+            },
+            {
+                "src": "../server/service/scratch/black.jpg", "progress": "0", "label": "Après grattage", "$$hashKey": "02V"
+            },
+            {
+                "src": "../server/service/scratch/black.jpg", "progress": "0", "label": "Après grattage", "$$hashKey": "037"
+            }
+            ],
+            "inputUrlAtterissage":"",
+            "inputDuree":"0",
+            "inputPourcentage":"80",
+            "inputSize":"45"
+        }
+        ,
+
+        "shake": {
+            "showShake":"true",
+            "link":"",
+            "finShakeCallback":"finshake.jpg",
+            "openNewWindow":"false",
+            "image":[ {
+                "src": "../server/service/shake/image_a_secouer_default.png", "progress": "0", "label": "Image à secouer", "$$hashKey": "01F"
+            }
+            ,
+                {
+                    "src": "../server/service/shake/black.jpg", "progress": "0", "label": "Image après secouage", "imageInfos": "Image finale", "$$hashKey": "01G"
+                }
+            ]
+        }
+        ,
+        "text": {
+            "bgColor":"#4b4b4b",
+            "text":"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><p> Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>",
+            "displayed":"true"
+        }
+        ,
+        "storetitles": {
+            "title": "Point de vente le plus proche de vous",
+            "customStoreTitle": "Votre point de vente",
+            "allStoreTitle": "VOIR TOUTES LES BOUTIQUES",
+            "bgColor": "#FFFFFF",
+            "txtColor": "#4b4b4b",
+            "geolocType": "geo",
+            "customStoreName": "Nom du point de vente",
+            "customStoreAddressa": "Adresse 1",
+            "customStoreAddressb": "Adresse 2",
+            "customStoreAddressc": "Adresse 3",
+            "customStorePostalCode": "Code Postal",
+            "customStoreTown": "Ville",
+            "customStoreOpenHour": "Horaires d'ouverture",
+            "customStoreLatitude": "Latitude",
+            "customStoreLongitude": "Longitude",
+            "customStorePhone": "",
+            "address":{
+                "displayed": "true",
+                "bgColor": "#4b4b4b",
+                "txtColor": "#FFFFFF"
+            },
+            "call":{
+                "displayed": "true",
+                "bgColor": "#4b4b4b",
+                "txtColor": "#FFFFFF"
+            },
+            "itinerary":{
+                "displayed": "true",
+                "bgColor": "#4b4b4b",
+                "txtColor": "#FFFFFF"
+            },
+            "allStores":{
+                "displayed": "true",
+                "bgColor": "#4b4b4b",
+                "txtColor": "#FFFFFF"
+            }
+        }
+        ,
+        "cgu": {
+            "bgColor": "#FFFFFF", "text": "<p><span style=\"font-weight: bold;\">Conditions</span></p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p><p> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>", "displayed": "true"
+        }
+        ,
+        "storesDisplayed":"true"
+    }
+    ,
+    "options": {
+        "title": "", "colorPrimary": "#4b4b4b", "colorSecondary": "#FFFFFF"
+    }
+    ,
+    "forms": {
+        "formShow":"true",
+        "formFields":[ {
+            "id":"1",
+            "icon":"edit",
+            "name":"Civilité",
+            "disableField":"true",
+            "type":"3",
+            "response":["Homme",
+            "Femme"],
+            "isRequired":"true",
+            "titleColor": {
+                "colors": {
+                    "background": "#4b4b4b", "backgroundIntroduction": "#4b4b4b", "text": "#FFFFFF", "edgeTextField": "#7a737a", "backgroundField": "#ffffff", "textField": "#000000"
+                }
+                ,
+                "styles": {
+                    "underlined": "false", "bold": "false", "italic": "false", "font": "Arial", "textSize": "14", "fontWeight": "normal", "fontStyle": "normal", "textDecoration": "normal"
+                }
+                ,
+                "buttonValidation": {
+                    "font":"Arial",
+                    "label":"VALIDER",
+                    "textSize":"14",
+                    "roundEdges":"5",
+                    "colors": {
+                        "background": "#ffffff", "text": "#000000", "edges": "#7a737a"
+                    }
+                }
+                ,
+                "positionChoices":[ {
+                    "id": "1", "position": "Sur la page principale"
+                }
+                ,
+                {
+                    "id": "2", "position": "Sur une page séparée"
+                }
+                ],
+                "mainPositionChoices":[ {
+                    "id": "1", "position": "Avant le diaporama"
+                }
+                ,
+                {
+                    "id": "2", "position": "Après le diaporama"
+                }
+                ,
+                {
+                    "id": "3", "position": "Avant la liste des magasins"
+                }
+                ,
+                {
+                    "id": "4", "position": "Après la liste des magasins"
+                }
+                ,
+                {
+                    "id": "5", "position": "A la fin du mini-site"
+                }
+                ],
+                "positionInsert":"true",
+                "position": {
+                    "id": "1", "subPosition": "5"
+                }
+            }
+            ,
+            "value":""
+        }
+        ,
+        {
+            "id":"2",
+            "icon":"edit",
+            "name":"Prénom",
+            "disableField":"true",
+            "type":"1",
+            "isRequired":"false",
+            "textMinChar":"0",
+            "textMaxChar":"50",
+            "titleColor": {
+                "colors": {
+                    "background": "#4b4b4b", "backgroundIntroduction": "#4b4b4b", "text": "#FFFFFF", "edgeTextField": "#7a737a", "backgroundField": "#ffffff", "textField": "#000000"
+                }
+                ,
+                "styles": {
+                    "underlined": "false", "bold": "false", "italic": "false", "font": "Arial", "textSize": "14", "fontWeight": "normal", "fontStyle": "normal", "textDecoration": "normal"
+                }
+                ,
+                "buttonValidation": {
+                    "font":"Arial",
+                    "label":"VALIDER",
+                    "textSize":"14",
+                    "roundEdges":"5",
+                    "colors": {
+                        "background": "#ffffff", "text": "#000000", "edges": "#7a737a"
+                    }
+                }
+                ,
+                "positionChoices":[ {
+                    "id": "1", "position": "Sur la page principale"
+                }
+                ,
+                {
+                    "id": "2", "position": "Sur une page séparée"
+                }
+                ],
+                "mainPositionChoices":[ {
+                    "id": "1", "position": "Avant le diaporama"
+                }
+                ,
+                {
+                    "id": "2", "position": "Après le diaporama"
+                }
+                ,
+                {
+                    "id": "3", "position": "Avant la liste des magasins"
+                }
+                ,
+                {
+                    "id": "4", "position": "Après la liste des magasins"
+                }
+                ,
+                {
+                    "id": "5", "position": "A la fin du mini-site"
+                }
+                ],
+                "positionInsert":"true",
+                "position": {
+                    "id": "1", "subPosition": "5"
+                }
+            }
+        }
+        ,
+        {
+            "id":"3",
+            "icon":"edit",
+            "name":"Nom",
+            "disableField":"true",
+            "type":"1",
+            "isRequired":"true",
+            "textMinChar":"0",
+            "textMaxChar":"50",
+            "titleColor": {
+                "colors": {
+                    "background": "#4b4b4b", "backgroundIntroduction": "#4b4b4b", "text": "#FFFFFF", "edgeTextField": "#7a737a", "backgroundField": "#ffffff", "textField": "#000000"
+                }
+                ,
+                "styles": {
+                    "underlined": "false", "bold": "false", "italic": "false", "font": "Arial", "textSize": "14", "fontWeight": "normal", "fontStyle": "normal", "textDecoration": "normal"
+                }
+                ,
+                "buttonValidation": {
+                    "font":"Arial",
+                    "label":"VALIDER",
+                    "textSize":"14",
+                    "roundEdges":"5",
+                    "colors": {
+                        "background": "#ffffff", "text": "#000000", "edges": "#7a737a"
+                    }
+                }
+                ,
+                "positionChoices":[ {
+                    "id": "1", "position": "Sur la page principale"
+                }
+                ,
+                {
+                    "id": "2", "position": "Sur une page séparée"
+                }
+                ],
+                "mainPositionChoices":[ {
+                    "id": "1", "position": "Avant le diaporama"
+                }
+                ,
+                {
+                    "id": "2", "position": "Après le diaporama"
+                }
+                ,
+                {
+                    "id": "3", "position": "Avant la liste des magasins"
+                }
+                ,
+                {
+                    "id": "4", "position": "Après la liste des magasins"
+                }
+                ,
+                {
+                    "id": "5", "position": "A la fin du mini-site"
+                }
+                ],
+                "positionInsert":"true",
+                "position": {
+                    "id": "1", "subPosition": "5"
+                }
+            }
+        }
+        ,
+        {
+            "id":"4",
+            "icon":"edit",
+            "name":"Mobile",
+            "disableField":"true",
+            "type":"8",
+            "isRequired":"true",
+            "textMinChar":"0",
+            "textMaxChar":"50",
+            "titleColor": {
+                "colors": {
+                    "background": "#4b4b4b", "backgroundIntroduction": "#4b4b4b", "text": "#FFFFFF", "edgeTextField": "#7a737a", "backgroundField": "#ffffff", "textField": "#000000"
+                }
+                ,
+                "styles": {
+                    "underlined": "false", "bold": "false", "italic": "false", "font": "Arial", "textSize": "14", "fontWeight": "normal", "fontStyle": "normal", "textDecoration": "normal"
+                }
+                ,
+                "buttonValidation": {
+                    "font":"Arial",
+                    "label":"VALIDER",
+                    "textSize":"14",
+                    "roundEdges":"5",
+                    "colors": {
+                        "background": "#ffffff", "text": "#000000", "edges": "#7a737a"
+                    }
+                }
+                ,
+                "positionChoices":[ {
+                    "id": "1", "position": "Sur la page principale"
+                }
+                ,
+                {
+                    "id": "2", "position": "Sur une page séparée"
+                }
+                ],
+                "mainPositionChoices":[ {
+                    "id": "1", "position": "Avant le diaporama"
+                }
+                ,
+                {
+                    "id": "2", "position": "Après le diaporama"
+                }
+                ,
+                {
+                    "id": "3", "position": "Avant la liste des magasins"
+                }
+                ,
+                {
+                    "id": "4", "position": "Après la liste des magasins"
+                }
+                ,
+                {
+                    "id": "5", "position": "A la fin du mini-site"
+                }
+                ],
+                "positionInsert":"true",
+                "position": {
+                    "id": "1", "subPosition": "5"
+                }
+            }
+        },
+        {
+            "id":"5",
+            "icon":"edit",
+            "name":"recipient",
+            "disableField": "false",
+            "type": "1",
+            "switchBtn": "false",
+            "showEditFieldBtn": "false",
+            "iconDivider": "false",
+            "isRequired": "false",
+            "$$hashKey": "07E",
+            "titleColor": "#FFFFFF",
+            "value": "",
+            "textMinChar": "0",
+            "textMaxChar": "50",
+            "lineNumber": "5",
+            "timeMin": "00:00",
+            "timeMax": "01:00",
+            "jsonName": "recipient",
+            "defaultValue": "$$[record]NM_TO1$$",
+            "sliderUnit": "Aucune",
+            "sliderUnitOtherVal": ""
+        }
+        ],
+        "fieldTypes":[ {
+            "value": "1", "name": "Texte"
+        }
+        ,
+        {
+            "value": "7", "name": "Zone de texte"
+        }
+        ,
+        {
+            "value": "4", "name": "Case à cocher"
+        }
+        ,
+        {
+            "value": "3", "name": "Bouton radio"
+        }
+        ,
+        {
+            "value": "6", "name": "Menu déroulant"
+        }
+        ,
+        {
+            "value": "8", "name": "Téléphone"
+        }
+        ,
+        {
+            "value": "2", "name": "Email"
+        }
+        ,
+        {
+            "value": "5", "name": "Date"
+        }
+        ,
+        {
+            "value": "9", "name": "Heure"
+        }
+        ,
+        {
+            "value": "10", "name": "Slider"
+        }
+        ],
+        "limitSwitch":"false",
+        "participatedText":"",
+        "thankNote":"<span style='font-family: Arial, sans-serif; font-size: 12px; line-height: normal; color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);'>Merci pour votre participation !&nbsp;</span><br>",
+        "introduction":"",
+        "layouts": {
+            "colors": {
+                "background": "#4b4b4b", "backgroundIntroduction": "#4b4b4b", "text": "#FFFFFF", "edgeTextField": "#7a737a", "backgroundField": "#ffffff", "textField": "#000000"
+            }
+            ,
+            "styles": {
+                "underlined": "false", "bold": "false", "italic": "false", "font": "Arial", "textSize": "14", "fontWeight": "normal", "fontStyle": "normal", "textDecoration": "normal"
+            }
+            ,
+            "buttonValidation": {
+                "font":"Arial",
+                "label":"VALIDER",
+                "textSize":"14",
+                "roundEdges":"5",
+                "colors": {
+                    "background": "#ffffff", "text": "#000000", "edges": "#7a737a"
+                }
+            }
+            ,
+            "positionChoices":[ {
+                "id": "1", "position": "Sur la page principale"
+            }
+            ,
+            {
+                "id": "2", "position": "Sur une page séparée"
+            }
+            ],
+            "mainPositionChoices":[ {
+                "id": "1", "position": "Avant le diaporama"
+            }
+            ,
+            {
+                "id": "2", "position": "Après le diaporama"
+            }
+            ,
+            {
+                "id": "3", "position": "Avant la liste des magasins"
+            }
+            ,
+            {
+                "id": "4", "position": "Après la liste des magasins"
+            }
+            ,
+            {
+                "id": "5", "position": "A la fin du mini-site"
+            }
+            ],
+            "positionInsert":"true",
+            "position": {
+                "id": "1", "subPosition": "5"
+            }
+        }
+    }
+    ,
+    "template": {
+        "id": "1"
+    }
+}

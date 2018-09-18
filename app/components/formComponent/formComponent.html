@@ -1,0 +1,96 @@
+<div class="clearfix"></div>
+<div class="footer row div-form"  ng-style="{'background' : settings.layouts.colors.backgroundIntroduction}" >
+    <div class="col-xs-12" ng-show="divIntroduction">
+        <div ng-bind-html="settings.realIntroduction | unsafe" style="padding: 15px 0px;"></div>
+    </div>
+
+     <div class="col-xs-12 active_wrapper" ng-style="{'background': settings.layouts.colors.background}">
+        <footer>
+            <div class="clearfix"></div>
+            <div class="col-xs-12" ng-style=" {'color': settings.layouts.colors.text, 'font-family': settings.layouts.styles.font, 'font-size': settings.layouts.styles.textSize + 'px', 'font-weight': settings.layouts.styles.fontWeight, 'font-style': settings.layouts.styles.fontStyle, 'text-decoration': settings.layouts.styles.textDecoration}">
+                <div class="row field" ng-repeat="item in settings.formFields track by $index"  ng-show="item.disableField.toString() == 'true' || (formFields.indexOf(item.id) >= 0 )">
+                    <div>
+                        <div ng-init="item.titleColor=settings.layouts.colors.text" ng-style="{'color': item.titleColor}">
+                            {{item.name}} <span ng-if="item.isRequired.toString() == 'true'">*</span>:
+                        </div>
+                        <div ng-switch on="item.type">
+                            <div ng-switch-when="1">
+                                <input id="changeThisValue_{{item.id}}" type="text" ng-init="item.value=item.defaultValue" ng-model="item.value"  class="form-control" ng-style="{'border-color': settings.layouts.colors.edgeTextField, 'background-color': settings.layouts.colors.backgroundField, 'color': settings.layouts.colors.textField, 'border-radius': settings.layouts.buttonValidation.roundEdgesSlider + 'px', 'font-family': settings.layouts.styles.font, 'font-size': settings.layouts.styles.textSize + 'px', 'font-weight': settings.layouts.styles.fontWeight, 'font-style': settings.layouts.styles.fontStyle, 'text-decoration': settings.layouts.styles.textDecoration}" />
+                            </div>
+                            <div ng-switch-when="2">
+                                <input autocapitalize="off" type="text" ng-init="item.value=item.defaultValue" ng-model="item.value" class="form-control" ng-style="{'border-color': settings.layouts.colors.edgeTextField, 'background-color': settings.layouts.colors.backgroundField, 'color': settings.layouts.colors.textField, 'border-radius': settings.layouts.buttonValidation.roundEdgesSlider + 'px', 'font-family': settings.layouts.styles.font, 'font-size': settings.layouts.styles.textSize + 'px', 'font-weight': settings.layouts.styles.fontWeight, 'font-style': settings.layouts.styles.fontStyle, 'text-decoration': settings.layouts.styles.textDecoration}" />
+                            </div>
+                            <div ng-switch-when="3" ng-init="item.value=''">
+                                <form action="#" style="padding-top:5px;">
+                                     <p style="margin-bottom: -6px;" ng-repeat="response in item.response track by $index" ng-click="item.value = response">
+                                        <input name="group1" class="with-gap" type="radio" ng-checked="item.value == response" />
+                                        <label class="materialize-label" ng-style="{'font-family': settings.layouts.styles.font, 'font-size'  : settings.layouts.styles.textSize  + 'px', 'font-weight': settings.layouts.styles.fontWeight, 'font-style': settings.layouts.styles.fontStyle, 'text-decoration': settings.layouts.styles.textDecoration }">{{response}}</label>
+                                    </p> 
+                                </form>
+                            </div>
+                            <div ng-switch-when="4" ng-init="item.value = [];">
+                                <form action="#" style="padding-top:5px;">
+                                    <p style="margin-bottom: -6px;" ng-repeat="response in item.response track by $index " ng-repeat="response in item.response track by $index" ng-click="addSelectedCheckbox(item, response)" ng-init="item.value = [];">
+                                        <input type="checkbox" class="materialize-checkbox filled-in" ng-checked="item.value.indexOf(response) >= 0"  />
+                                        <label class="materialize-label" ng-style="{'font-family': settings.layouts.styles.font, 'font-size'  : settings.layouts.styles.textSize  + 'px', 'font-weight': settings.layouts.styles.fontWeight, 'font-style': settings.layouts.styles.fontStyle, 'text-decoration': settings.layouts.styles.textDecoration }">{{response}}</label>
+                                    </p>
+                                </form>
+                            </div>
+                            <div ng-switch-when="5">
+                                <input type="date" ng-init="item.value=''" ng-model="item.value" class="form-control" ng-style="{'border-color': settings.layouts.colors.edgeTextField, 'background-color': settings.layouts.colors.backgroundField, 'color': settings.layouts.colors.textField, 'border-radius': settings.layouts.buttonValidation.roundEdgesSlider + 'px', 'font-family': settings.layouts.styles.font, 'font-size': settings.layouts.styles.textSize  + 'px', 'font-weight': settings.layouts.styles.fontWeight, 'font-style': settings.layouts.styles.fontStyle, 'text-decoration': settings.layouts.styles.textDecoration }" />
+                            </div>
+                            <div ng-switch-when="6">
+                                <customselect ng-model="item.value" options="item.response" ng-init="item.value=''" layouts="settings.layouts" ></customselect>
+                            </div>
+                            <div ng-switch-when="7">
+                                <textarea id="changeThisValue_{{item.id}}" ng-init="item.value=item.defaultValue" ng-model="item.value" rows="{{item.lineNumber}}" style=" width: 100%;  resize: none;" ng-style="{'border-radius': settings.layouts.buttonValidation.roundEdgesSlider + 'px', 'border-color': settings.layouts.colors.edgeTextField, 'background-color': settings.layouts.colors.backgroundField, 'color': settings.layouts.colors.textField, 'font-family': settings.layouts.styles.font, 'font-size': settings.layouts.styles.textSize  + 'px', 'font-weight': settings.layouts.styles.fontWeight, 'font-style': settings.layouts.styles.fontStyle, 'text-decoration': settings.layouts.styles.textDecoration}"></textarea>
+                            </div>
+                            <div ng-switch-when="8">
+                                <input id="changeThisValue_{{item.id}}" type="tel" size="10" ng-init="item.value=item.defaultValue" ng-model="item.value" class="form-control" ng-style="{'border-color': settings.layouts.colors.edgeTextField, 'background-color': settings.layouts.colors.backgroundField, 'color': settings.layouts.colors.textField, 'border-radius': settings.layouts.buttonValidation.roundEdgesSlider + 'px', 'font-family': settings.layouts.styles.font, 'font-size': settings.layouts.styles.textSize  + 'px', 'font-weight': settings.layouts.styles.fontWeight, 'font-style': settings.layouts.styles.fontStyle, 'text-decoration': settings.layouts.styles.textDecoration}" />
+                            </div>
+                            <div ng-switch-when="9">
+                                <customselect ng-model="item.value" min="item.timeMin" max="item.timeMax" ng-init="item.value=''" interval="item.hourInterval" layouts="settings.layouts"></customselect>
+                            </div>
+                            <div ng-switch-when="10" style="padding-top: 29px; padding-bottom: 3px;">
+                                <div ng-switch on="item.sliderType">
+                                    <div ng-switch-when="1">
+                                        <slider formatter="item.value" min="item.sliderMin" ng-init="item.value='0'" sunit="{{item.sliderUnit == 'Autre' ? item.sliderUnitOtherVal : item.sliderUnit}}"  ng-model="item.value" step="item.sliderInterval" max="item.sliderMax"></slider>
+                                        <!--<slider sunit="{{item.sliderUnit == 'Autre' ? '(en ' +item.sliderUnitOtherVal+')' : '(en '+item.sliderUnit+')'}}" tooltip="{{item.sliderUnit == 'Autre' ? '(en ' +item.sliderUnitOtherVal+')' : '(en '+item.sliderUnit+')'}}" min="item.sliderMin" ng-init="item.value=''" ng-model="item.value" step="item.sliderInterval" max="item.sliderMax"></slider>-->
+                                    </div>
+                                    <div ng-switch-when="2">
+                                        <slider formatter="item.value" sunit="{{item.sliderUnit == 'Autre' ? item.sliderUnitOtherVal : item.sliderUnit}}"  min="item.sliderMin" ng-init="item.value='0'" ng-model="item.value" step="item.sliderInterval" max="item.sliderMax" range="true" ></slider>
+                                        <!--<slider tick-labels="true" tooltip="{{item.sliderUnit == 'Autre' ? '(en ' +item.sliderUnitOtherVal+')' : '(en '+item.sliderUnit+')'}}"  min="item.sliderMin" ng-init="item.value=''" ng-model="item.value" step="item.sliderInterval" max="item.sliderMax" range="true" ></slider>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <br/>
+            <div class="col-xs-12 navigation">
+				<div class="col-xs-2 text-left">
+					<button class="btn" ng-show="prevButton" aria-hidden="true" ng-click="prevPage()">
+						<span class="glyphicon glyphicon-circle-arrow-left"></span>
+					</button>
+				</div>				
+				<div class="col-xs-8 text-center" ng-show="prevButton || nextButton" style="position: relative; z-index: 99;">
+					{{ page }}/{{ total_page }}
+				</div>					
+				<div class="col-xs-2 text-right"s>
+					<button class="btn" ng-show="nextButton" aria-hidden="true" ng-click="nextPage()">
+						<span class="glyphicon glyphicon-circle-arrow-right"></span>
+					</button>
+				</div>
+            </div>
+            <div class="clearfix"></div>
+            <br/>
+            <div ng-show="validateButton">
+                <button type="button" ng-click="saveForm();" class="btn btn-default center-block" style="width: 100%; min-height:45px; white-space: normal;" 
+                ng-style="{'font-family': settings.layouts.buttonValidation.font, 'font-size': settings.layouts.buttonValidation.textSize + 'px', 'border-radius': settings.layouts.buttonValidation.roundEdgesSlider + 'px', 'background-color': settings.layouts.buttonValidation.colors.background, 'color': settings.layouts.buttonValidation.colors.text, 'border-color': settings.layouts.buttonValidation.colors.edges}">{{settings.layouts.buttonValidation.label }}</button>
+            </div>
+        </footer>
+        <div class="clearfix"></div>
+    </div> 
+</div>
